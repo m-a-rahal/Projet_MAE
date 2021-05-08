@@ -20,19 +20,15 @@ public class Solveur {
 				}
 			}
 		}
-		int i=0,j=1,k=0;
-		int solution[] = {i,j,k};
-		System.out.println(String.format("sol = [%d,%d,%d] --> %s", i,j,k, appliquer(solution, clauses)));
+		System.out.println(satisfies_clause(new int[] {-2,-2,1}, new int[] {0,1,1}));
 	}
 	
 	public static boolean appliquer(int solution[], int clauses[][]) {
 		int i,j;
 		for (i = 0; i < nbr_clauses; i++) {
-			for (j = 0; j < nbr_variables; j++) {
-				if (solution[j] == clauses[i][j])
-					break; // si un litteral est satisfait, passer a la prochaine clause
+			if(!satisfies_clause(solution, clauses[i])) {
+				return false; // si une clause n'est pas SAT, le systeme n'est pas SAT aussi
 			}
-			if (j == nbr_variables) return false; // si aucun litterale n'est satisfait, la clause est non SAT --> les clauses sont non SAT
 		}
 		return true; // a ce point, tout les clauses sont SAT
 	}
@@ -43,4 +39,13 @@ public class Solveur {
 		return solution;
 	}
 	
+	public static boolean satisfies_clause(int solution[], int clause[]) {
+		// solution size must to be <= clause size (solution size < clause in case the solution is incomplete for example)
+		for (int i = 0; i < solution.length; i++) {
+			if (solution[i] == clause[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
