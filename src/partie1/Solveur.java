@@ -1,25 +1,27 @@
 package partie1;
 
-import java.util.Arrays;
+import Classes.FileManager;
 
 public class Solveur {
-	public static int nbr_clauses = 3;
-	public static int nbr_variables = 3;
-	int clauses[][] = new int[nbr_clauses][nbr_variables];
-	int solution[];
 	
+
 	public static void main(String[] args) {
-		int clauses[][] = {{ 0, 1, 1}, // -1 veut dire
-		           { 0,-1, 1},
-		           {-1, 1,-1}};
-		
-		System.out.println(BFS.resoudre(clauses));
-		System.out.println(DFS.resoudre(clauses));
+		int clauses[][] = new FileManager().lire_clauses(FileManager.SAT, 2);
+		//print(clauses);
+		print(DFS.resoudre(clauses));
+		print(BFS.resoudre(clauses));
 	}
 	
-	public static int[] solution_vide() {
-		int solution [] = new int[nbr_variables];
-		Arrays.fill(solution, -2);
-		return solution;
+	public static void print(Object text) {
+		System.out.println(text);
+	}
+	
+	public static void print(int[][] array) {
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array[i].length; j++) {
+				System.out.print(array[i][j] + " ");
+			}
+			print("");
+		}
 	}
 }

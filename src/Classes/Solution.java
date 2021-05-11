@@ -1,4 +1,4 @@
-package partie1;
+package Classes;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +25,7 @@ public class Solution extends ArrayList<Integer>{
 		return new_Solution;
 	}
 	
-	public boolean appliquer(int clauses[][]) {
+	public boolean sat(int clauses[][]) {
 		for (int i = 0; i < clauses.length; i++) {
 			if(!this.satisfie_clause(clauses[i])) {
 				return false; // si une clause n'est pas SAT, le systeme n'est pas SAT aussi
@@ -51,5 +51,12 @@ public class Solution extends ArrayList<Integer>{
 			text.append(x + " ");
 		}
 		return text.toString();
+	}
+
+	public Solution complete(int m) {
+		for (int i = this.size(); i < m; i++) {
+			this.add(-1);
+		}
+		return this;
 	}
 }
