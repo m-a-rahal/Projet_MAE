@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
-	private static final int COMPLETITION_VALUE = -1; /** utilisée pour compléter les solutions partielles*/
+	private static final int COMPLETITION_VALUE = 0; /** utilisée pour compléter les solutions partielles*/
 	protected int cost;
 	
 	public int getCost() {
@@ -28,37 +28,35 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		super();
 	}
 
-	public Solution extend(int instatiation) {
+	public Solution extend(int signe) {
 		/** retourne une nouvelle solution etendue en rajoutant l'instatioation donnée */
 		Solution new_Solution = new Solution(this);
-		new_Solution.add(instatiation);
+		new_Solution.add(signe*(size() + 1));
 		return new_Solution;
 	}
 	
-	public boolean sat(int clauses[][]) {
-		for (int i = 0; i < clauses.length; i++) {
-			if(!this.satisfie_clause(clauses[i])) {
+	public boolean sat(ClauseList clauses) {
+		for (int i = 0; i < clauses.size(); i++) {
+			if(!this.satisfie_clause(clauses.get(i))) {
 				return false; // si une clause n'est pas SAT, le systeme n'est pas SAT aussi
 			}
 		}
 		return true; // a ce point, tout les clauses sont SAT
 	}
 	
-	public int sat_count(int clauses[][]) {
+	public int sat_count(ClauseList clauses) {
 		int count = 0;
-		for (int i = 0; i < clauses.length; i++) {
-			if(this.satisfie_clause(clauses[i]))
+		for (int i = 0; i < clauses.size(); i++) {
+			if(this.satisfie_clause(clauses.get(i)))
 				count++;
 		}
 		return count; // a ce point, tout les clauses sont SAT
 	}
 	
-	public boolean satisfie_clause(int clause[]) {
-		// solution size must to be <= clause size (solution size < clause in case the solution is incomplete for example)
-		for (int i = 0; i < this.size(); i++) {
-			if (this.get(i) == clause[i]) {
+	public boolean satisfie_clause(Clause clause) {
+		for (Integer x : this) {
+			if (clause.contains(x))
 				return true;
-			}
 		}
 		return false;
 	}

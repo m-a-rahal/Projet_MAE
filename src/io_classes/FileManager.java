@@ -1,12 +1,17 @@
-package Classes;
+package io_classes;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import Classes.Clause;
+import Classes.ClauseList;
 
 public class FileManager {
 	public static int SAT = 0;
@@ -18,47 +23,47 @@ public class FileManager {
 	
 	
 	
-	public int[][] lire_clauses(int type, int indice) {
+	public ClauseList lire_benchmark(int type, int indice) {
+		if (indice > 0) indice--; // les indices sont de 1 a 100
 		/** type = SAT ou NON_SAT, indice de 1 à 100 (il y a 100 fichiers)*/
-		int [][] clauses = null;
+		
 		try {
 		String ficher_cnf = get_fichier_cnf(type, indice);
-		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(ficher_cnf)));
-		 // get n and m
-		this.get_cnf_file_parameters(reader);
-		// allocate clauses matix with n and m
-		clauses = init_calauses(n,m);
-		String line;
-		for (int i = 0; i < n; i++) {
-			line = reader.readLine(); if (line == null) break;
-			int clause [] = parse_clause_line(line);
-			
-			if (clause != null)
-				for (int j : clause) {
-					if (j < 0)
-						clauses[i][-j-1] = 0;
-					else {
-						clauses[i][j-1] = 1;
-					}
-				}
-			else {
-				throw new Exception();
-			}
+		return read(ficher_cnf);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);;
 		}
+		return null;
+	}
+	
+	public ClauseList read(String ficher_cnf) {
+		try {
+			ClauseList clauses = null;
+			System.out.println("reading from file:\n"+ficher_cnf);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(ficher_cnf)));
+			 // get n and m
+			this.get_cnf_file_parameters(reader);
+			// allocate clauses matix with n and m
+			clauses = init_calauses(n,m);
+			String line;
+			for (int i = 0; i < n; i++) {
+				line = reader.readLine(); if (line == null) break;
+				clauses.add(parse_clause_line(line));
+			}
+			return clauses;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(-1);;
 		}
-		
-		return clauses;
+		return null;
 	}
 	
-	private int[][] init_calauses(int n, int m) {
-		int[][] clauses = new int[n][m];
-		for (int i = 0; i < n; i++)
-			for (int j = 0; j < m; j++) 
-				clauses[i][j] = -1;
+	private ClauseList init_calauses(int n, int m) {
+		ClauseList clauses = new ClauseList(n);
+		clauses.setN(n);
+		clauses.setM(m);
 		return clauses;
 	}
 
@@ -74,16 +79,21 @@ public class FileManager {
 		
 		File dir = new File(fichier);
 		assert indice > 0 && indice <= 100 : "l'indice doit être entre 1 et 100 (inclus)";
-		return fichier + "\\" + dir.list()[indice];
+		ArrayList<IndexedFile> files = new ArrayList<>();
+		for (String path : dir.list()) {
+			files.add(new IndexedFile(path));
+		}
+		Collections.sort(files);
+		return fichier + "\\" + files.get(indice);
 
 	}
 
-	private int[] parse_clause_line(String line) {
+	private Clause parse_clause_line(String line) {
 		String[] str_values = line.trim().split(" ");
 		int nbr_literaux = str_values.length - 1; // ignores last value — which equals 0
-		int [] clause = new int[nbr_literaux];
+		Clause clause = new Clause();
 		for (int i = 0; i < nbr_literaux; i++) { 
-			clause[i] = Integer.parseInt(str_values[i]);
+			clause.add(Integer.parseInt(str_values[i]));
 		}
 		return clause;
 	}
@@ -101,7 +111,7 @@ public class FileManager {
 		}
 	}
 
-	public Matcher match(String pattern,String text) {
+	public static Matcher match(String pattern,String text) {
 	    Pattern p = Pattern.compile(pattern);
 		Matcher matcher = p.matcher(text);
 		return matcher.find() ? matcher : null;
