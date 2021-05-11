@@ -12,7 +12,7 @@ public class SAT_MAIN {
 	public static void main(String[] args) {
 		
 		ClauseList clauses = new FileManager().lire_benchmark(FileManager.SAT, 1);
-		//clauses = new FileManager().read(ex_sat);
+		clauses = new FileManager().read(ex_sat);
 		//print(clauses);
  		print(new A_star().resoudre(clauses));
  		print(new BFS().resoudre(clauses));
