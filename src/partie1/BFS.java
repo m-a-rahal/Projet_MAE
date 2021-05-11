@@ -1,15 +1,14 @@
 package partie1;
 
 import java.util.LinkedList;
-
-import Classes.ClauseList;
 import Classes.Solution;
 
 
-public class BFS {
-	public static Solution resoudre(ClauseList clauses) {
+public class BFS extends Solveur_constructif {
+	@Override
+	public Solution solve() {
 		int m = clauses.getM();
-		LinkedList<Solution> ouvert = new LinkedList<Solution>(); // contient les solutions a explorer
+		ouvert = new LinkedList<Solution>(); // contient les solutions a explorer
 		ouvert.add(new Solution().extend(1));
 		ouvert.add(new Solution().extend(-1));
 		while(ouvert.size() > 0) {

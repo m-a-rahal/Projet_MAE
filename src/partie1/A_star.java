@@ -2,17 +2,18 @@ package partie1;
 
 import java.util.PriorityQueue;
 
-import Classes.ClauseList;
+
 import Classes.Solution;
 
 
-public class A_star {
-	PriorityQueue<Solution> ouvert = new PriorityQueue<Solution>(); // contient les solutions a explorer
-	ClauseList clauses; 
+public class A_star extends Solveur_constructif {
 	
-	public Solution resoudre(ClauseList clauses) {
-		this.clauses = clauses;
+
+	
+	@Override
+	public Solution solve() {
 		int m = clauses.getM();
+		ouvert = new PriorityQueue<Solution>(); // contient les solutions a explorer
 		inseret_in_ouvert(new Solution().extend(-1)); // inserer dans la bonne position
 		inseret_in_ouvert(new Solution().extend(1)); // inserer dans la bonne position
 		while(ouvert.size() > 0) {

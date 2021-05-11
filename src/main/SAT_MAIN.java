@@ -15,8 +15,8 @@ public class SAT_MAIN {
 		//clauses = new FileManager().read(ex_sat);
 		//print(clauses);
  		print(new A_star().resoudre(clauses));
- 		print(BFS.resoudre(clauses));
-		print(DFS.resoudre(clauses));
+ 		print(new BFS().resoudre(clauses));
+		print(new DFS().resoudre(clauses));
 	}
 	
 	public static void print(Object text) {

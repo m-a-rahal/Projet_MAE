@@ -1,15 +1,15 @@
 package partie1;
-
 import java.util.Stack;
-
-import Classes.ClauseList;
 import Classes.Solution;
 
 
-public class DFS {
-	public static Solution resoudre(ClauseList clauses) {
+public class DFS extends Solveur_constructif{
+	protected Stack<Solution> ouvert;
+	
+	@Override
+	public Solution solve() {
 		int m = clauses.getM();
-		Stack<Solution> ouvert = new Stack<Solution>(); // contient les solutions a explorer
+		ouvert = new Stack<Solution>(); // contient les solutions a explorer
 		ouvert.add(new Solution().extend(-1));
 		ouvert.add(new Solution().extend(1));
 		while(ouvert.size() > 0) {
