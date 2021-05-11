@@ -3,9 +3,19 @@ package Classes;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Solution extends ArrayList<Integer>{
+public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
+	private static final int COMPLETITION_VALUE = -1; /** utilisée pour compléter les solutions partielles*/
+	protected int cost;
 	
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
 	public Solution(int size) {
 		super(size);
 	}
@@ -34,6 +44,15 @@ public class Solution extends ArrayList<Integer>{
 		return true; // a ce point, tout les clauses sont SAT
 	}
 	
+	public int sat_count(int clauses[][]) {
+		int count = 0;
+		for (int i = 0; i < clauses.length; i++) {
+			if(this.satisfie_clause(clauses[i]))
+				count++;
+		}
+		return count; // a ce point, tout les clauses sont SAT
+	}
+	
 	public boolean satisfie_clause(int clause[]) {
 		// solution size must to be <= clause size (solution size < clause in case the solution is incomplete for example)
 		for (int i = 0; i < this.size(); i++) {
@@ -43,6 +62,18 @@ public class Solution extends ArrayList<Integer>{
 		}
 		return false;
 	}
+
+	public Solution complete(int m) {
+		for (int i = this.size(); i < m; i++) {
+			this.add(COMPLETITION_VALUE);
+		}
+		return this;
+	}
+
+	@Override
+	public int compareTo(Solution other) {
+		return this.cost - other.getCost();
+	}
 	
 	@Override
 	public String toString() {
@@ -51,12 +82,5 @@ public class Solution extends ArrayList<Integer>{
 			text.append(x + " ");
 		}
 		return text.toString();
-	}
-
-	public Solution complete(int m) {
-		for (int i = this.size(); i < m; i++) {
-			this.add(-1);
-		}
-		return this;
 	}
 }

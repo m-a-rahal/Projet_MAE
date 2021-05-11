@@ -7,9 +7,10 @@ public class Solveur {
 
 	public static void main(String[] args) {
 		int clauses[][] = new FileManager().lire_clauses(FileManager.SAT, 2);
-		//print(clauses);
-		print(DFS.resoudre(clauses));
-		print(BFS.resoudre(clauses));
+		print(clauses);
+		//print(DFS.resoudre(clauses));
+		//print(BFS.resoudre(clauses));
+		print(new A_star().resoudre(clauses));
 	}
 	
 	public static void print(Object text) {
