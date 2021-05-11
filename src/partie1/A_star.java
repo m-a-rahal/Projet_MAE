@@ -17,7 +17,7 @@ public class A_star {
 		inseret_in_ouvert(new Solution().extend(1)); // inserer dans la bonne position
 		while(ouvert.size() > 0) {
 			Solution solution = ouvert.remove(); // défiler
-			System.out.println(solution.getCost());//####
+			//System.out.println(solution.getF());//####
 			if (solution.sat(clauses)) {
 				return solution.complete(m); // cette solution marche
 			}
@@ -29,13 +29,13 @@ public class A_star {
 		return null;
 	}
 	
-	public int valuation(Solution s) {
-		return s.sat_count(clauses);
+	public int h(Solution s) {
+		return s.non_sat_count(clauses);
 	}
 	
 	
 	public boolean inseret_in_ouvert(Solution s) {
-		s.setCost(valuation(s) + s.size());
+		s.setF(h(s) + s.size()); // f(x) a minimiser = h(x) + g(x), g(x) = cost = taille (solution)
 		return ouvert.add(s);
 	}
 }

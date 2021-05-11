@@ -6,14 +6,14 @@ import java.util.Collection;
 public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
 	private static final int COMPLETITION_VALUE = 0; /** utilisée pour compléter les solutions partielles*/
-	protected int cost;
+	protected int f;
 	
-	public int getCost() {
-		return cost;
+	public int getF() {
+		return f;
 	}
 
-	public void setCost(int cost) {
-		this.cost = cost;
+	public void setF(int f) {
+		this.f = f;
 	}
 
 	public Solution(int size) {
@@ -44,10 +44,10 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		return true; // a ce point, tout les clauses sont SAT
 	}
 	
-	public int sat_count(ClauseList clauses) {
+	public int non_sat_count(ClauseList clauses) {
 		int count = 0;
 		for (int i = 0; i < clauses.size(); i++) {
-			if(this.satisfie_clause(clauses.get(i)))
+			if(!this.satisfie_clause(clauses.get(i)))
 				count++;
 		}
 		return count; // a ce point, tout les clauses sont SAT
@@ -70,7 +70,7 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 
 	@Override
 	public int compareTo(Solution other) {
-		return this.cost - other.getCost();
+		return this.f - other.getF();
 	}
 	
 	@Override
@@ -79,6 +79,8 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		for (Integer x : this) {
 			text.append(x + " ");
 		}
+		if (f != 0)
+			text.append("(f = "+f+") ");
 		return text.toString();
 	}
 }
