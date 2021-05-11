@@ -79,7 +79,7 @@ public class FileManager {
 		
 		File dir = new File(fichier);
 		assert indice > 0 && indice <= 100 : "l'indice doit être entre 1 et 100 (inclus)";
-		ArrayList<IndexedFile> files = new ArrayList<>();
+		ArrayList<IndexedFile> files = new ArrayList<IndexedFile>();
 		for (String path : dir.list()) {
 			files.add(new IndexedFile(path));
 		}

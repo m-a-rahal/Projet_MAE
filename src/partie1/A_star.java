@@ -7,7 +7,7 @@ import Classes.Solution;
 
 
 public class A_star {
-	PriorityQueue<Solution> ouvert = new PriorityQueue<>(); // contient les solutions a explorer
+	PriorityQueue<Solution> ouvert = new PriorityQueue<Solution>(); // contient les solutions a explorer
 	ClauseList clauses; 
 	
 	public Solution resoudre(ClauseList clauses) {
