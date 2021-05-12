@@ -14,8 +14,7 @@ public class A_star extends Solveur_constructif {
 	public Solution solve() {
 		int m = clauses.getM();
 		ouvert = new PriorityQueue<Solution>(); // contient les solutions a explorer
-		inseret_in_ouvert(new Solution().extend(-1)); // inserer dans la bonne position
-		inseret_in_ouvert(new Solution().extend(1)); // inserer dans la bonne position
+		inseret_in_ouvert(new Solution());  // inserer solution vide
 		while(ouvert.size() > 0) {
 			Solution solution = ouvert.remove(); // défiler
 			//System.out.println(solution.getF());//####

@@ -9,8 +9,7 @@ public class BFS extends Solveur_constructif {
 	public Solution solve() {
 		int m = clauses.getM();
 		ouvert = new LinkedList<Solution>(); // contient les solutions a explorer
-		ouvert.add(new Solution().extend(1));
-		ouvert.add(new Solution().extend(-1));
+		ouvert.add(new Solution());  // inserer solution vide
 		while(ouvert.size() > 0) {
 			Solution solution = ouvert.remove(); // défiler
 			if (solution.sat(clauses)) {
