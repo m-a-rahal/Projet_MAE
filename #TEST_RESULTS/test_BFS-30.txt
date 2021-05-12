@@ -1,0 +1,20 @@
+BFS(21,21,SAT):398ms
+BFS(21,22,SAT):63ms
+BFS(21,23,SAT):9ms
+BFS(21,24,SAT):210ms
+BFS(21,25,SAT):535ms
+BFS(21,26,SAT):926ms
+BFS(21,27,SAT):7543ms
+BFS(21,28,SAT):3888ms
+BFS(21,29,SAT):305ms
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+    at java.base/java.util.Arrays.copyOf(Arrays.java:3480)
+    at java.base/java.util.ArrayList.grow(ArrayList.java:237)
+    at java.base/java.util.ArrayList.grow(ArrayList.java:244)
+    at java.base/java.util.ArrayList.add(ArrayList.java:454)
+    at java.base/java.util.ArrayList.add(ArrayList.java:467)
+    at Classes.Solution.extend(Solution.java:35)
+    at partie1.BFS.solve(BFS.java:19)
+    at partie1.Solveur_constructif.solve(Solveur_constructif.java:22)
+    at io_classes.Tester.tester(Tester.java:26)
+    at main.SAT_MAIN.main(SAT_MAIN.java:15)
