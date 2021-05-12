@@ -14,7 +14,7 @@ public class SAT_MAIN {
 		//ClauseList clauses = new FileManager().lire_benchmark(FileManager.SAT, 1);
 		//clauses = new FileManager().read(ex_sat);
 		//print(clauses);
-		ClauseList clauses = new ClauseList(100, 23).gen_aleat(true);
+		ClauseList clauses = new ClauseList(8, 10).gen_aleat(false);
 		print(clauses);
  		print(new A_star().resoudre(clauses));
  		print(new BFS().resoudre(clauses));
