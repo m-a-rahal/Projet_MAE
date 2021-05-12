@@ -47,7 +47,7 @@ public class ClauseList extends ArrayList<Clause> {
 		} else { // for now it generates random clauses
 			// choose rand X_ subset of X of size k, where X = {1,2,3,...,m} the set of all variables
 			if (n < Math.pow(2, taille_clause)) {
-				System.out.println("WARNING: can't generate non SAT with nbr_clauses < 2^clause_size. returnung random ClauseList instead");
+				System.out.println("WARNING: can't generate non SAT with nbr_clauses = "+n+" < 2^clause_size = 2^"+taille_clause+". returnung random ClauseList instead");
 				return random_ClauseList(taille_clause);
 			}
 			int [] X_ = var_subset(taille_clause);
