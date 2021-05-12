@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
@@ -81,5 +82,17 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		if (f != 0)
 			text.append("(f = "+f+") ");
 		return text.toString();
+	}
+
+	public static Solution gen_alea(int m) {
+		Solution s = new Solution();
+		for (int i = 0; i < m; i++) {
+			if (Math.random() > 0.5) {
+				s.add(i+1);
+			} else {
+				s.add(-(i+1));
+			}
+		}
+		return s;
 	}
 }

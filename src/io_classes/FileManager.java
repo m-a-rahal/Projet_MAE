@@ -61,9 +61,7 @@ public class FileManager {
 	}
 	
 	private ClauseList init_calauses(int n, int m) {
-		ClauseList clauses = new ClauseList(n);
-		clauses.setN(n);
-		clauses.setM(m);
+		ClauseList clauses = new ClauseList(n,m);
 		return clauses;
 	}
 
