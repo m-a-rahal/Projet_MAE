@@ -8,9 +8,12 @@ import java.util.TreeSet;
 public class Clause extends TreeSet<Integer>{
 	private static final long serialVersionUID = 1L;
 
+	public Clause(Clause clause) {
+		super(clause);
+	}
+	public Clause() {}
+
 	public Clause completer_aleatoirement(int taille, int nbr_variables) {
-		if (taille + this.size() > nbr_variables)
-			throw new IndexOutOfBoundsException("ne peut remplir une clause avec une taille = "+(taille + this.size())+" > nbr variables = "+nbr_variables);
 		
 		/** remplis la clause avec des nombres aléatoires des variables non déja pris  */
 		ArrayList<Integer> non_deja_pris = new ArrayList<Integer>();
@@ -28,5 +31,12 @@ public class Clause extends TreeSet<Integer>{
 			}
 		}
 		return this;
+	}
+	
+	public Clause extend(int x) {
+		/** retourne une nouvelle solution etendue en rajoutant l'instatioation donnée */
+		Clause new_clause = new Clause(this);
+		new_clause.add(x);
+		return new_clause;
 	}
 }

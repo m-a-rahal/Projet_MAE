@@ -1,5 +1,7 @@
 package Classes;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Stack;
 
 public class ClauseList extends ArrayList<Clause> {
 	protected int n;
@@ -26,6 +28,12 @@ public class ClauseList extends ArrayList<Clause> {
 	}
 	
 	public ClauseList gen_aleat(boolean sat, int taille_clause) {
+		if (taille_clause > m)
+			throw new IndexOutOfBoundsException("ne peut remplir une clause avec une taille = "+ taille_clause+" > nbr variables = "+ m);
+		else if (taille_clause <= 0) {
+			return null;
+		}
+		
 		if (sat) { // il ya une solution S tq dans chaque clause, on doit avoir au moins un x qui est dans S
 			Solution solution = Solution.gen_alea(m);
 			for (int i = 0; i < n; i++) {
@@ -37,6 +45,10 @@ public class ClauseList extends ArrayList<Clause> {
 				this.add(clause.completer_aleatoirement(taille_clause-1, m));
 			}
 		} else { // for now it generates random clauses
+			// choose rand X_ subset of X of size k, where X = {1,2,3,...,m} the set of all variables
+			int [] X_ = var_subset(taille_clause);
+			Stack<Clause> ouvert = new Stack<>();
+			ouvert.add(new Clause());
 			for (int i = 0; i < n; i++) {
 				Clause clause = new Clause();
 				// compléter avec des x aléatoires et ajouter a cette liste
@@ -45,7 +57,23 @@ public class ClauseList extends ArrayList<Clause> {
 		}
 		return this;
 	}
+	
 	public ClauseList gen_aleat(boolean sat) {
 		return gen_aleat(sat, Math.min(m,3)); // comme dans les becnhmarks, 3 litteraux par clause
 	}
+
+	private int[] var_subset(int subset_size) {
+		ArrayList<Integer> X =  new ArrayList<>(m);
+		for (int i = 0; i < m; i++) {
+			X.add(i);
+		}
+		Collections.shuffle(X);
+		int [] X_ = new int[subset_size];
+		for (int i = 0; i < subset_size; i++) {
+			X_[i] = X.get(i);
+		}
+		return X_;
+	}
+
+	
 }

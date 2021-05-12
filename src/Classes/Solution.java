@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
-	private static final int COMPLETITION_VALUE = 0; /** utilisée pour compléter les solutions partielles*/
+	private static final Integer COMPLETITION_VALUE = null; /** utilisée pour compléter les solutions partielles, si null on complete la solution avec des x normales (pas des -x)*/
 	protected int f;
 	
 	public int getF() {
@@ -63,9 +63,14 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 	}
 
 	public Solution complete(int m) {
-		for (int i = this.size(); i < m; i++) {
-			this.add(COMPLETITION_VALUE);
-		}
+		if (COMPLETITION_VALUE != null)
+			for (int i = this.size(); i < m; i++) {
+				this.add(COMPLETITION_VALUE);
+			} 
+		else
+			for (int i = this.size(); i < m; i++) {
+				this.add(size() + 1);
+			} 
 		return this;
 	}
 
