@@ -1,24 +1,14 @@
 package main;
 
-import Classes.ClauseList;
-import io_classes.FileManager;
+import io_classes.Tester;
 import partie1.A_star;
-import partie1.BFS;
-import partie1.DFS;
 
 public class SAT_MAIN {
 	
 	static String ex_sat = "E:/_Mohamed_/USTHB/M1_SII (REDO)/S2 2021/RC/TP/TP1 - Solveur SAT/programme inference/bc_2.cnf";
 	public static void main(String[] args) {
-		
-		//ClauseList clauses = new FileManager().lire_benchmark(FileManager.SAT, 1);
-		//clauses = new FileManager().read(ex_sat);
-		//print(clauses);
-		ClauseList clauses = new ClauseList(8, 10).gen_aleat(false);
-		print(clauses);
- 		print(new A_star().resoudre(clauses));
- 		print(new BFS().resoudre(clauses));
-		print(new DFS().resoudre(clauses));
+		Tester tester = new Tester(20, 20);
+		tester.tester(new A_star());
 	}
 	
 	public static void print(Object text) {

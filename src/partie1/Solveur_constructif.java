@@ -17,4 +17,9 @@ public abstract class Solveur_constructif {
 		return solution;
 	}
 	public abstract Solution solve();
+	public Solution solve(ClauseList clauseList) {
+		clauses = clauseList;
+		return solve();
+	}
+	
 }
