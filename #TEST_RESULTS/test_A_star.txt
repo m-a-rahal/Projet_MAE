@@ -232,8 +232,6 @@ A_star(20,17,SAT):1ms
 A_star(20,18,SAT):3ms
 A_star(20,19,SAT):4ms
 A_star(20,20,SAT):0ms
-
-
 A_star(8,3,non-SAT):0ms
 A_star(8,4,non-SAT):1ms
 A_star(8,5,non-SAT):0ms

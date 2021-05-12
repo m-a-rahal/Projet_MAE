@@ -6,10 +6,10 @@ import partie1.Solveur_constructif;
 public class Tester {
 	protected String output_file;
 	protected String output_folder = "#TEST_RESULTS";
-	protected int min_n = 8;
-	protected int min_m = 3;
-	protected int max_n;
-	protected int max_m;
+	public int min_n = 8;
+	public int min_m = 3;
+	public int max_n;
+	public int max_m;
 	
 	public Tester(int max_n, int max_m) {
 		this.max_n = max_n;
@@ -24,7 +24,7 @@ public class Tester {
 				ClauseList clauses = new ClauseList(n, m).gen_aleat(SAT);
 				long t0 = System.currentTimeMillis();
 				solveur.solve(clauses);
-				save_data(System.currentTimeMillis() - t0, getClass().getSimpleName(), n, m, SAT);
+				save_data(System.currentTimeMillis() - t0, solveur.getClass().getSimpleName(), n, m, SAT);
 			}
 		}
 		

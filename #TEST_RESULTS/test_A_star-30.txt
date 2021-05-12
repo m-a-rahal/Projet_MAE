@@ -1,0 +1,113 @@
+A_star(21,21,SAT):8ms
+A_star(21,22,SAT):13ms
+A_star(21,23,SAT):4ms
+A_star(21,24,SAT):74ms
+A_star(21,25,SAT):0ms
+A_star(21,26,SAT):136ms
+A_star(21,27,SAT):1ms
+A_star(21,28,SAT):488ms
+A_star(21,29,SAT):150ms
+A_star(21,30,SAT):0ms
+A_star(22,21,SAT):5ms
+A_star(22,22,SAT):10ms
+A_star(22,23,SAT):1ms
+A_star(22,24,SAT):0ms
+A_star(22,25,SAT):0ms
+A_star(22,26,SAT):468ms
+A_star(22,27,SAT):3ms
+A_star(22,28,SAT):4ms
+A_star(22,29,SAT):287ms
+A_star(22,30,SAT):8ms
+A_star(23,21,SAT):0ms
+A_star(23,22,SAT):417ms
+A_star(23,23,SAT):0ms
+A_star(23,24,SAT):0ms
+A_star(23,25,SAT):0ms
+A_star(23,26,SAT):23ms
+A_star(23,27,SAT):1ms
+A_star(23,28,SAT):197ms
+A_star(23,29,SAT):20ms
+A_star(23,30,SAT):16ms
+A_star(24,21,SAT):1ms
+A_star(24,22,SAT):1ms
+A_star(24,23,SAT):1ms
+A_star(24,24,SAT):0ms
+A_star(24,25,SAT):142ms
+A_star(24,26,SAT):23ms
+A_star(24,27,SAT):2ms
+A_star(24,28,SAT):7ms
+A_star(24,29,SAT):30ms
+A_star(24,30,SAT):6ms
+A_star(25,21,SAT):1ms
+A_star(25,22,SAT):1ms
+A_star(25,23,SAT):0ms
+A_star(25,24,SAT):3ms
+A_star(25,25,SAT):29ms
+A_star(25,26,SAT):115ms
+A_star(25,27,SAT):714ms
+A_star(25,28,SAT):14ms
+A_star(25,29,SAT):1ms
+A_star(25,30,SAT):0ms
+A_star(26,21,SAT):2ms
+A_star(26,22,SAT):1ms
+A_star(26,23,SAT):1ms
+A_star(26,24,SAT):0ms
+A_star(26,25,SAT):0ms
+A_star(26,26,SAT):5ms
+A_star(26,27,SAT):1ms
+A_star(26,28,SAT):34ms
+A_star(26,29,SAT):27ms
+A_star(26,30,SAT):2ms
+A_star(27,21,SAT):0ms
+A_star(27,22,SAT):1ms
+A_star(27,23,SAT):2ms
+A_star(27,24,SAT):0ms
+A_star(27,25,SAT):0ms
+A_star(27,26,SAT):0ms
+A_star(27,27,SAT):40ms
+A_star(27,28,SAT):307ms
+A_star(27,29,SAT):2ms
+A_star(27,30,SAT):3ms
+A_star(28,21,SAT):0ms
+A_star(28,22,SAT):1ms
+A_star(28,23,SAT):0ms
+A_star(28,24,SAT):2ms
+A_star(28,25,SAT):5ms
+A_star(28,26,SAT):0ms
+A_star(28,27,SAT):53ms
+A_star(28,28,SAT):728ms
+A_star(28,29,SAT):1ms
+A_star(28,30,SAT):35ms
+A_star(29,21,SAT):0ms
+A_star(29,22,SAT):0ms
+A_star(29,23,SAT):50ms
+A_star(29,24,SAT):1ms
+A_star(29,25,SAT):1ms
+A_star(29,26,SAT):2ms
+A_star(29,27,SAT):132ms
+A_star(29,28,SAT):14ms
+A_star(29,29,SAT):0ms
+A_star(29,30,SAT):1ms
+A_star(30,21,SAT):0ms
+A_star(30,22,SAT):12ms
+A_star(30,23,SAT):0ms
+A_star(30,24,SAT):3ms
+A_star(30,25,SAT):2ms
+A_star(30,26,SAT):366ms
+A_star(30,27,SAT):0ms
+A_star(30,28,SAT):2ms
+A_star(30,29,SAT):117ms
+A_star(30,30,SAT):90ms
+A_star(21,21,non-SAT):9416ms
+A_star(21,22,non-SAT):23190ms
+A_star(21,23,non-SAT):54457ms
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+    at java.base/java.util.Arrays.copyOf(Arrays.java:3480)
+    at java.base/java.util.ArrayList.toArray(ArrayList.java:369)
+    at java.base/java.util.ArrayList.<init>(ArrayList.java:181)
+    at Classes.Solution.<init>(Solution.java:25)
+    at Classes.Solution.extend(Solution.java:34)
+    at partie1.A_star.solve(A_star.java:25)
+    at partie1.Solveur_constructif.solve(Solveur_constructif.java:22)
+    at io_classes.Tester.tester(Tester.java:37)
+    at main.SAT_MAIN.main(SAT_MAIN.java:15)
