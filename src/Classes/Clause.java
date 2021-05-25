@@ -2,7 +2,6 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 public class Clause extends TreeSet<Integer>{

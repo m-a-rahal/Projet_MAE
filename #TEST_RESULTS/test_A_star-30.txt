@@ -98,9 +98,9 @@ A_star(30,27,SAT):0ms
 A_star(30,28,SAT):2ms
 A_star(30,29,SAT):117ms
 A_star(30,30,SAT):90ms
-A_star(21,21,non-SAT):9416ms
-A_star(21,22,non-SAT):23190ms
-A_star(21,23,non-SAT):54457ms
+A_star(21,21,non-SAT):8933ms
+A_star(21,22,non-SAT):20992ms
+A_star(21,23,non-SAT):51143ms
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
     at java.base/java.util.Arrays.copyOf(Arrays.java:3480)
     at java.base/java.util.ArrayList.toArray(ArrayList.java:369)

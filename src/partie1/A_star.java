@@ -18,7 +18,7 @@ public class A_star extends Solveur_constructif {
 		while(ouvert.size() > 0) {
 			Solution solution = ouvert.remove(); // défiler
 			//System.out.println(solution.getF());//####
-			if (solution.sat(clauses)) {
+			if (solution.getF() - solution.size() == 0) { //f = non_sat + size ==> si f - size == 0 alors solution sat all clauses
 				return solution.complete(m); // cette solution marche
 			}
 			if (solution.size() < m) {
@@ -29,13 +29,8 @@ public class A_star extends Solveur_constructif {
 		return null;
 	}
 	
-	public int h(Solution s) {
-		return s.non_sat_count(clauses);
-	}
-	
-	
 	public boolean inseret_in_ouvert(Solution s) {
-		s.setF(h(s) + s.size()); // f(x) a minimiser = h(x) + g(x), g(x) = cost = taille (solution)
+		s.setF(s.non_sat_count(clauses) + s.size()); // f(x)=h(s)+c(s) a minimiser = h(x) + g(x), g(x) = cost = taille (solution)
 		return ouvert.add(s);
 	}
 }

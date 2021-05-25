@@ -2,7 +2,6 @@ package Classes;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
