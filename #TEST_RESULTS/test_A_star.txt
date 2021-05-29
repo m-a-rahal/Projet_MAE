@@ -1,0 +1,58 @@
+A_star(30,3,SAT):8ms
+A_star(30,4,SAT):2ms
+A_star(30,5,SAT):1ms
+A_star(30,6,SAT):1ms
+A_star(30,7,SAT):3ms
+A_star(30,8,SAT):1ms
+A_star(30,9,SAT):1ms
+A_star(30,10,SAT):5ms
+A_star(30,11,SAT):1ms
+A_star(30,12,SAT):1ms
+A_star(30,13,SAT):1ms
+A_star(30,14,SAT):1ms
+A_star(30,15,SAT):1ms
+A_star(30,16,SAT):3ms
+A_star(30,17,SAT):2ms
+A_star(30,18,SAT):0ms
+A_star(30,19,SAT):0ms
+A_star(30,20,SAT):1ms
+A_star(30,21,SAT):55ms
+A_star(30,22,SAT):4ms
+A_star(30,23,SAT):2ms
+A_star(30,24,SAT):0ms
+A_star(30,25,SAT):18ms
+A_star(30,26,SAT):2ms
+A_star(30,27,SAT):2ms
+A_star(30,28,SAT):8ms
+A_star(30,29,SAT):138ms
+A_star(30,30,SAT):1664ms
+A_star(30,3,non-SAT):0ms
+A_star(30,4,non-SAT):0ms
+A_star(30,5,non-SAT):0ms
+A_star(30,6,non-SAT):0ms
+A_star(30,7,non-SAT):0ms
+A_star(30,8,non-SAT):0ms
+A_star(30,9,non-SAT):2ms
+A_star(30,10,non-SAT):2ms
+A_star(30,11,non-SAT):5ms
+A_star(30,12,non-SAT):10ms
+A_star(30,13,non-SAT):69ms
+A_star(30,14,non-SAT):61ms
+A_star(30,15,non-SAT):106ms
+A_star(30,16,non-SAT):186ms
+A_star(30,17,non-SAT):372ms
+A_star(30,18,non-SAT):713ms
+A_star(30,19,non-SAT):1748ms
+A_star(30,20,non-SAT):3224ms
+A_star(30,21,non-SAT):6354ms
+A_star(30,22,non-SAT):17617ms
+A_star(30,23,non-SAT):46607ms
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+    at java.base/java.util.ArrayList.<init>(ArrayList.java:186)
+    at Classes.Solution.<init>(Solution.java:24)
+    at Classes.Solution.extend(Solution.java:33)
+    at partie1.A_star.solve(A_star.java:25)
+    at partie1.Solveur_constructif.solve(Solveur_constructif.java:22)
+    at io_classes.Tester.loop(Tester.java:39)
+    at io_classes.Tester.tester(Tester.java:26)
+    at main.SAT_MAIN.main(SAT_MAIN.java:19)

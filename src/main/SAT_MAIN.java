@@ -10,12 +10,12 @@ public class SAT_MAIN {
 	static String ex_sat = "E:/_Mohamed_/USTHB/M1_SII (REDO)/S2 2021/RC/TP/TP1 - Solveur SAT/programme inference/bc_2.cnf";
 	public static void main(String[] args) {
 		Tester tester = new Tester(30, 30);
-		//tester.min_n = 21;
+		tester.min_n = 30;
 		//tester.min_m = 21;
-		//tester.tester(new BFS());
+		//.tester(new BFS(), false);
 		//System.out.println("\n\n\n");
-		tester.tester(new DFS());
-		System.out.println("\n\n\n");
+		//tester.tester(new DFS());
+		//System.out.println("\n\n\n");
 		tester.tester(new A_star());
 		System.out.println("\n\n\n");
 		

@@ -19,17 +19,19 @@ public class Tester {
 	public void tester(Solveur_constructif solveur) {
 		// sat instances
 		boolean SAT = true;
-		for (int m = min_m; m <= max_m; m++) {
-			for (int n = min_n; n <= max_n; n++) {
-				ClauseList clauses = new ClauseList(n, m).gen_aleat(SAT);
-				long t0 = System.currentTimeMillis();
-				solveur.solve(clauses);
-				save_data(System.currentTimeMillis() - t0, solveur.getClass().getSimpleName(), n, m, SAT);
-			}
-		}
+		loop(solveur, SAT);
 		
 		// non-SAT instances
 		SAT = false;
+		loop(solveur, SAT);
+	}
+	
+	public void tester(Solveur_constructif solveur, boolean SAT) {
+		SAT = false;
+		loop(solveur, SAT);
+	}
+	
+	public void loop(Solveur_constructif solveur, boolean SAT) {
 		for (int m = min_m; m <= max_m; m++) {
 			for (int n = min_n; n <= max_n; n++) {
 				ClauseList clauses = new ClauseList(n, m).gen_aleat(SAT);
