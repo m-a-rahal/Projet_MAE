@@ -12,8 +12,8 @@ public class SAT_MAIN {
 		Tester tester = new Tester(30, 30);
 		//tester.min_n = 21;
 		//tester.min_m = 21;
-		tester.tester(new BFS());
-		System.out.println("\n\n\n");
+		//tester.tester(new BFS());
+		//System.out.println("\n\n\n");
 		tester.tester(new DFS());
 		System.out.println("\n\n\n");
 		tester.tester(new A_star());
