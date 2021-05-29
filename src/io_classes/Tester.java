@@ -19,8 +19,8 @@ public class Tester {
 	public void tester(Solveur_constructif solveur) {
 		// sat instances
 		boolean SAT = true;
-		for (int n = min_n; n <= max_n; n++) {
-			for (int m = min_m; m <= max_m; m++) {
+		for (int m = min_m; m <= max_m; m++) {
+			for (int n = min_n; n <= max_n; n++) {
 				ClauseList clauses = new ClauseList(n, m).gen_aleat(SAT);
 				long t0 = System.currentTimeMillis();
 				solveur.solve(clauses);
