@@ -1,5 +1,7 @@
 package main;
 
+import Classes.ClauseList;
+import io_classes.FileManager;
 import io_classes.Tester;
 import partie1.A_star;
 import partie1.BFS;
@@ -11,6 +13,9 @@ public class SAT_MAIN {
 	public static void main(String[] args) {
 		Tester tester = new Tester(30, 30);
 		tester.min_n = 30;
+
+		//ClauseList clauses = new FileManager().lire_benchmark(FileManager.SAT, 10);
+		//new A_star().resoudre(clauses);
 		//tester.min_m = 21;
 		//.tester(new BFS(), false);
 		//System.out.println("\n\n\n");

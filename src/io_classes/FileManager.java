@@ -15,7 +15,7 @@ import Classes.ClauseList;
 
 public class FileManager {
 	public static int SAT = 0;
-	public static int NON_SAT = 0;
+	public static int NON_SAT = 1;
 	public static String benchmarks_sat = "E:\\JAVA JEE\\eclipse-workspace\\Projet_MAE\\benchmarks\\uf75.325.100";
 	public static String benchmarks_non_sat = "E:\\JAVA JEE\\eclipse-workspace\\Projet_MAE\\benchmarks\\uuf75.325.100";
 	protected int n; // nombre de clauses
