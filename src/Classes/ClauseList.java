@@ -1,6 +1,7 @@
 package Classes;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Stack;
 
 public class ClauseList extends ArrayList<Clause> {
@@ -52,17 +53,23 @@ public class ClauseList extends ArrayList<Clause> {
 			}
 			int [] X_ = var_subset(taille_clause);
 			Stack<Clause> ouvert = new Stack<>();
-			ouvert.add(new Clause()); // inserer une clause vide 
+			ouvert.add(new Clause()); // inserer une clause vide
+			int count_clauses = 0;
 			for (int x : X_) {
 				Stack<Clause> new_ouvert = new Stack<>();
 				while (ouvert.size() > 0) {
 					Clause c = ouvert.pop();
 					new_ouvert.add(c.extend(x));
 					new_ouvert.add(c.extend(-x));
+					count_clauses+=1;
 				}
 				ouvert = new_ouvert;
 			}
 			this.addAll(ouvert);
+			// complete with random clauses until number of clauses reached
+			for (int i = count_clauses+1; i < n; i++) {
+				this.add(new Clause().completer_aleatoirement(taille_clause, m));
+			}
 		}
 		return this;
 	}
