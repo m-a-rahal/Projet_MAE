@@ -1,5 +1,6 @@
 package Classes;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeSet;
@@ -37,5 +38,14 @@ public class Clause extends TreeSet<Integer>{
 		Clause new_clause = new Clause(this);
 		new_clause.add(x);
 		return new_clause;
+	}
+	
+	@Override
+	public String toString() {
+		String text = "";
+		for (Integer x : this) {
+			text += x.toString()+" ";
+		}
+		return text;
 	}
 }

@@ -93,5 +93,11 @@ public class ClauseList extends ArrayList<Clause> {
 		return X_;
 	}
 
-	
+	public ArrayList<String> as_string_list() {
+		ArrayList<String> list = new ArrayList<>();
+		for (Clause clause : this) {
+			list.add(clause.toString());
+		}
+		return list;
+	}
 }

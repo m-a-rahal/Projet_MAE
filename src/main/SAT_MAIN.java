@@ -11,7 +11,7 @@ public class SAT_MAIN {
 	
 	static String ex_sat = "E:/_Mohamed_/USTHB/M1_SII (REDO)/S2 2021/RC/TP/TP1 - Solveur SAT/programme inference/bc_2.cnf";
 	public static void main(String[] args) {
-		Tester tester = new Tester(30, 30);
+		Tester tester = new Tester(30, 47);
 		tester.min_n = 30;
 
 		//ClauseList clauses = new FileManager().lire_benchmark(FileManager.SAT, 10);
@@ -21,7 +21,7 @@ public class SAT_MAIN {
 		//System.out.println("\n\n\n");
 		//tester.tester(new DFS());
 		//System.out.println("\n\n\n");
-		tester.tester(new A_star());
+		tester.tester(new BFS(), true);
 		System.out.println("\n\n\n");
 		
 	}

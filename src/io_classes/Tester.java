@@ -27,7 +27,6 @@ public class Tester {
 	}
 	
 	public void tester(Solveur_constructif solveur, boolean SAT) {
-		SAT = false;
 		loop(solveur, SAT);
 	}
 	
