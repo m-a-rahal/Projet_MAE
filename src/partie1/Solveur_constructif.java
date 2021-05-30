@@ -16,6 +16,15 @@ public abstract class Solveur_constructif {
 		System.out.println("\n> "+getClass().getSimpleName() + ", temps exec = "+ (System.currentTimeMillis() - t0)+" ms");
 		return solution;
 	}
+	
+	public long temps_execution(ClauseList clauseList) { /** cette met*/
+		clauses = clauseList;
+		long t0 = System.currentTimeMillis();
+		Solution solution =  solve();
+		//System.out.println("\n> "+getClass().getSimpleName() + ", temps exec = "+ (System.currentTimeMillis() - t0)+" ms");
+		return System.currentTimeMillis() - t0;
+	}
+
 	public abstract Solution solve();
 	public Solution solve(ClauseList clauseList) {
 		clauses = clauseList;
