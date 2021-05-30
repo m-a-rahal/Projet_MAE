@@ -1,10 +1,9 @@
-package main;
+package application;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -14,11 +13,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
-public class Application extends javafx.application.Application {
+public class Application {
 
     @FXML
     private ResourceBundle resources;
@@ -69,6 +65,9 @@ public class Application extends javafx.application.Application {
     private Label nbr_clauses_label;
 
     @FXML
+    private Button generer_clauses_btn;
+
+    @FXML
     private ListView<?> clauses_list;
 
     @FXML
@@ -87,6 +86,11 @@ public class Application extends javafx.application.Application {
 
     @FXML
     void exit_prog(ActionEvent event) {
+
+    }
+
+    @FXML
+    void generer_clauses_btn_action(ActionEvent event) {
 
     }
 
@@ -131,24 +135,11 @@ public class Application extends javafx.application.Application {
         assert nbr_var_label != null : "fx:id=\"nbr_var_label\" was not injected: check your FXML file 'Untitled'.";
         assert nbr_clauses_txt != null : "fx:id=\"nbr_clauses_txt\" was not injected: check your FXML file 'Untitled'.";
         assert nbr_clauses_label != null : "fx:id=\"nbr_clauses_label\" was not injected: check your FXML file 'Untitled'.";
+        assert generer_clauses_btn != null : "fx:id=\"generer_clauses_btn\" was not injected: check your FXML file 'Untitled'.";
         assert clauses_list != null : "fx:id=\"clauses_list\" was not injected: check your FXML file 'Untitled'.";
         assert clauses_data_label != null : "fx:id=\"clauses_data_label\" was not injected: check your FXML file 'Untitled'.";
         assert chart != null : "fx:id=\"chart\" was not injected: check your FXML file 'Untitled'.";
         assert test_btn != null : "fx:id=\"test_btn\" was not injected: check your FXML file 'Untitled'.";
 
     }
-
-
-    @Override
-	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("application.fxml"));
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
