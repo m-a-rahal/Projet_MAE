@@ -51,7 +51,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="539.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Application">
   <children>
     <MenuBar VBox.vgrow="NEVER">
          <VBox.margin>
@@ -67,7 +67,7 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="432.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
          <children>
-            <SplitPane dividerPositions="0.345703125" layoutX="160.0" layoutY="126.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <SplitPane dividerPositions="0.392578125" layoutX="160.0" layoutY="126.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="638.0">
                      <children>
@@ -76,14 +76,14 @@
                             <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="47.0" prefWidth="636.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="6.0" text="Algorithmes" />
-                                    <CheckBox fx:id="bfs_choice" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#update_bfs_choice" text="BFS" />
-                                    <CheckBox fx:id="dfs_choice" layoutX="79.0" layoutY="24.0" mnemonicParsing="false" onAction="#update_dfs_choice" text="DFS" />
-                                    <CheckBox fx:id="a_star_choice" layoutX="143.0" layoutY="24.0" mnemonicParsing="false" onAction="#update_a_star_choice" text="A*" />
+                                    <CheckBox fx:id="bfs_choice" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#update_bfs_choice" selected="true" text="BFS" />
+                                    <CheckBox fx:id="dfs_choice" layoutX="79.0" layoutY="24.0" mnemonicParsing="false" onAction="#update_dfs_choice" selected="true" text="DFS" />
+                                    <CheckBox fx:id="a_star_choice" layoutX="143.0" layoutY="24.0" mnemonicParsing="false" onAction="#update_a_star_choice" selected="true" text="A*" />
                                  </children>
                               </AnchorPane>
                               <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
                                  <items>
-                                  <AnchorPane maxHeight="-Infinity" prefHeight="127.0" prefWidth="636.0">
+                                  <AnchorPane minHeight="-Infinity" prefHeight="128.0" prefWidth="315.0">
                                        <children>
                                           <Label layoutX="14.0" layoutY="6.0" text="Système SAT" />
                                           <RadioButton fx:id="sat_from_file_radio" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#src_radio_update" selected="true" text="depuis fichier">
@@ -108,9 +108,10 @@
                                           <Label fx:id="nbr_var_label" disable="true" layoutX="122.0" layoutY="85.0" text="nbr variables" />
                                           <TextField fx:id="nbr_clauses_txt" disable="true" layoutX="202.0" layoutY="81.0" prefHeight="25.0" prefWidth="41.0" text="30" />
                                           <Label fx:id="nbr_clauses_label" disable="true" layoutX="252.0" layoutY="85.0" text="nbr clauses" />
+                                          <Button fx:id="generer_clauses_btn" disable="true" layoutX="11.0" layoutY="108.0" mnemonicParsing="false" onAction="#generer_clauses_btn_action" prefHeight="25.0" prefWidth="103.0" text="générer clauses" />
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <AnchorPane minHeight="-Infinity" prefHeight="128.0" prefWidth="200.0">
                                        <children>
                                           <ListView fx:id="clauses_list" layoutY="28.0" prefHeight="91.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
                                           <Label fx:id="clauses_data_label" layoutX="7.0" layoutY="6.0" text="Clauses" />
@@ -126,10 +127,10 @@
                      <children>
                         <SplitPane layoutX="159.0" layoutY="19.0" orientation="VERTICAL" prefHeight="267.0" prefWidth="638.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="266.0" prefWidth="636.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="14.0" text="Résultats du test" />
-                                    <BarChart fx:id="chart" layoutY="39.0" prefHeight="291.0" prefWidth="636.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0">
+                                    <BarChart fx:id="chart" layoutY="39.0" prefHeight="213.0" prefWidth="636.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="39.0">
                                       <xAxis>
                                         <CategoryAxis label="Algorithmes" side="BOTTOM" />
                                       </xAxis>
