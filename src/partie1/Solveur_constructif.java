@@ -1,8 +1,9 @@
 package partie1;
-import java.util.Queue;
 
 import Classes.ClauseList;
 import Classes.Solution;
+
+import java.util.Queue;
 
 public abstract class Solveur_constructif {
 	Queue<Solution> ouvert;
@@ -16,13 +17,13 @@ public abstract class Solveur_constructif {
 		System.out.println("\n> "+getClass().getSimpleName() + ", temps exec = "+ (System.currentTimeMillis() - t0)+" ms");
 		return solution;
 	}
-	
+
 	public long temps_execution(ClauseList clauseList) { /** cette met*/
 		clauses = clauseList;
 		long t0 = System.currentTimeMillis();
 		Solution solution =  solve();
 		//System.out.println("\n> "+getClass().getSimpleName() + ", temps exec = "+ (System.currentTimeMillis() - t0)+" ms");
-		return System.currentTimeMillis() - t0;
+		return  (System.currentTimeMillis() - t0)/1000;
 	}
 
 	public abstract Solution solve();

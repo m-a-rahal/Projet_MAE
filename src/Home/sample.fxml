@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="600.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="Home.Controller">
+   <children>
+      <Pane layoutY="-2.0" prefHeight="202.0" prefWidth="600.0" style="-fx-background-color: #f2f2f2;">
+         <children>
+            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Systeme SAT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="43.0" prefHeight="35.0" prefWidth="300.0" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="rad_sat_depuis_fichier" mnemonicParsing="false" onAction="#toggle_SAT_radios" selected="true" text="Depuis un fichier">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="SAT_selction" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rad_sat_random" mnemonicParsing="false" onAction="#toggle_SAT_radios" text="générer aleartoirement" toggleGroup="$SAT_selction" />
+               </children>
+            </HBox>
+            <TextField fx:id="text_file_path" layoutX="88.0" layoutY="82.0" prefHeight="25.0" prefWidth="155.0" />
+            <Button fx:id="chose_file" layoutX="254.0" layoutY="82.0" mnemonicParsing="false" onAction="#chooseFile_pressed" text="Choisir fichier" />
+            <CheckBox fx:id="chk_ifSat" layoutX="20.0" layoutY="124.0" mnemonicParsing="false" text="SAT" />
+            <TextField fx:id="text_nbr_var" layoutX="66.0" layoutY="120.0" prefHeight="25.0" prefWidth="34.0" />
+            <Text layoutX="105.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nbr variables">
+               <font>
+                  <Font size="10.0" />
+               </font></Text>
+            <TextField fx:id="text_nbr_clause" layoutX="173.0" layoutY="120.0" prefHeight="25.0" prefWidth="45.0" />
+            <Text layoutX="224.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nbr clauses">
+               <font>
+                  <Font size="10.0" />
+               </font></Text>
+            <Separator layoutX="369.0" layoutY="4.0" orientation="VERTICAL" prefHeight="181.0" prefWidth="7.0" />
+            <TableView fx:id="tabV_clause" layoutX="379.0" layoutY="4.0" prefHeight="181.0" prefWidth="207.0">
+              <columns>
+                <TableColumn fx:id="tabCol_clause" prefWidth="206.0" text="Clause" />
+              </columns>
+            </TableView>
+            <Button fx:id="run" layoutX="61.0" layoutY="153.0" mnemonicParsing="false" onAction="#run_press" prefHeight="25.0" prefWidth="207.0" style="-fx-background-color: #48a868;" text="Tester" textFill="WHITE" />
+            <Label layoutX="20.0" layoutY="86.0" text="Fichier CNF" />
+            <Button fx:id="genere_clauses_btn" layoutX="277.0" layoutY="121.0" mnemonicParsing="false" onAction="#genere_clauses_pressed" prefHeight="25.0" prefWidth="85.0" text="Générer clauses">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <BarChart fx:id="bar_graph" layoutX="185.0" layoutY="218.0" prefHeight="390.0" prefWidth="395.0">
+        <xAxis>
+          <CategoryAxis fx:id="algo" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="temps" label="Temps d'execustion (s)" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Pane layoutX="21.0" layoutY="269.0" prefHeight="96.0" prefWidth="155.0" style="-fx-background-color: #f2f2f2;">
+         <children>
+            <Label layoutX="70.0" layoutY="13.0" text="A*">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Separator layoutX="9.0" layoutY="48.0" prefHeight="3.0" prefWidth="136.0" />
+            <Label fx:id="a_star_temps" layoutX="73.0" layoutY="63.0" text="0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="21.0" layoutY="379.0" prefHeight="96.0" prefWidth="155.0" style="-fx-background-color: #f2f2f2;">
+         <children>
+            <Label layoutX="65.0" layoutY="13.0" text="BFS">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Separator layoutX="9.0" layoutY="48.0" prefHeight="3.0" prefWidth="136.0" />
+            <Label fx:id="bfs_temps" layoutX="73.0" layoutY="64.0" text="0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="21.0" layoutY="489.0" prefHeight="96.0" prefWidth="155.0" style="-fx-background-color: #f2f2f2;">
+         <children>
+            <Label layoutX="65.0" layoutY="13.0" text="DFS">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Separator layoutX="9.0" layoutY="48.0" prefHeight="3.0" prefWidth="136.0" />
+            <Label fx:id="dfs_temps" layoutX="73.0" layoutY="62.0" text="0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="21.0" layoutY="233.0" text="Temps d'exécution des Algorithmes" />
+      <Separator layoutX="23.0" layoutY="255.0" prefHeight="3.0" prefWidth="189.0" />
+   </children>
+</AnchorPane>

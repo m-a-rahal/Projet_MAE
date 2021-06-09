@@ -1,6 +1,8 @@
 package partie1;
-import java.util.Stack;
+
 import Classes.Solution;
+
+import java.util.Stack;
 
 
 public class DFS extends Solveur_constructif{

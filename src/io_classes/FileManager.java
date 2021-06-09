@@ -1,17 +1,13 @@
 package io_classes;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import Classes.Clause;
+import Classes.ClauseList;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import Classes.Clause;
-import Classes.ClauseList;
 
 public class FileManager {
 	public static int SAT = 0;
@@ -32,7 +28,7 @@ public class FileManager {
 		return read(ficher_cnf);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.exit(-1);;
+			System.exit(-1);
 		}
 		return null;
 	}
@@ -55,7 +51,7 @@ public class FileManager {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.exit(-1);;
+			System.exit(-1);
 		}
 		return null;
 	}

@@ -1,7 +1,8 @@
 package partie1;
 
-import java.util.LinkedList;
 import Classes.Solution;
+
+import java.util.LinkedList;
 
 
 public class BFS extends Solveur_constructif {

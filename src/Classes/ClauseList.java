@@ -1,7 +1,7 @@
 package Classes;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Stack;
 
 public class ClauseList extends ArrayList<Clause> {
@@ -14,7 +14,7 @@ public class ClauseList extends ArrayList<Clause> {
 		this.n = n;
 		this.m = m;
 	}
-	
+
 	public int getN() {
 		return n;
 	}
@@ -27,14 +27,14 @@ public class ClauseList extends ArrayList<Clause> {
 	public void setM(int m) {
 		this.m = m;
 	}
-	
+
 	public ClauseList gen_aleat(boolean sat, int taille_clause) {
 		if (taille_clause > m)
 			throw new IndexOutOfBoundsException("ne peut remplir une clause avec une taille = "+ taille_clause+" > nbr variables = "+ m);
 		else if (taille_clause <= 0) {
 			return null;
 		}
-		
+
 		if (sat) { // il ya une solution S tq dans chaque clause, on doit avoir au moins un x qui est dans S
 			Solution solution = Solution.gen_alea(m);
 			for (int i = 0; i < n; i++) {
@@ -73,7 +73,7 @@ public class ClauseList extends ArrayList<Clause> {
 		}
 		return this;
 	}
-	
+
 	private ClauseList random_ClauseList(int taille_clause) {
 		for (int i = 0; i < n; i++) {
 			Clause clause = new Clause();

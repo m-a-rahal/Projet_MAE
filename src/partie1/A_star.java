@@ -1,9 +1,8 @@
 package partie1;
 
-import java.util.PriorityQueue;
-
-
 import Classes.Solution;
+
+import java.util.PriorityQueue;
 
 
 public class A_star extends Solveur_constructif {
