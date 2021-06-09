@@ -11,18 +11,33 @@ public class SAT_MAIN {
 	
 	static String ex_sat = "E:/_Mohamed_/USTHB/M1_SII (REDO)/S2 2021/RC/TP/TP1 - Solveur SAT/programme inference/bc_2.cnf";
 	public static void main(String[] args) {
-		Tester tester = new Tester(30, 47);
-		tester.min_n = 30;
-
+		Tester tester = new Tester(300, 47);
+		
+		/*ClauseList clauseList = new ClauseList(300, 20).gen_aleat(false);
+		int i = 0;
+		for (Clause clause : clauseList) {
+			System.out.println(++i +" - "+clause.toString());
+		}
+		System.out.println(new A_star().resoudre(clauseList));
+		System.exit(0);*/
+		
+		tester.min_n = 300;
+		tester.min_m = 31;
 		//ClauseList clauses = new FileManager().lire_benchmark(FileManager.SAT, 10);
 		//new A_star().resoudre(clauses);
-		//tester.min_m = 21;
 		//.tester(new BFS(), false);
 		//System.out.println("\n\n\n");
 		//tester.tester(new DFS());
 		//System.out.println("\n\n\n");
-		tester.tester(new BFS(), true);
+		tester.tester(new A_star(), true);
 		System.out.println("\n\n\n");
+		
+		
+		String cnf_file = "";
+		ClauseList clauses = new FileManager().read(cnf_file);
+		long temps_a_star = new A_star().temps_execution(clauses);
+		long temps_BFS = new BFS().temps_execution(clauses);
+		long temps_DFS = new DFS().temps_execution(clauses);
 		
 	}
 	
