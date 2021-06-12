@@ -53,6 +53,15 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		return count; // a ce point, tout les clauses sont SAT
 	}
 	
+	public int sat_count(ClauseList clauses) {
+		int count = 0;
+		for (int i = 0; i < clauses.size(); i++) {
+			if(this.satisfie_clause(clauses.get(i)))
+				count++;
+		}
+		return count; // a ce point, tout les clauses sont SAT
+	}
+	
 	public boolean satisfie_clause(Clause clause) {
 		for (Integer x : this) {
 			if (clause.contains(x))
