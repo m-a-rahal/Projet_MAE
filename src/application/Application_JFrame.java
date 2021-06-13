@@ -73,15 +73,17 @@ public class Application_JFrame extends JFrame {
 		options_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		options_panel.setBounds(10, 74, 320, 195);
 		panel_donnes.add(options_panel);
+		options_panel.setLayout(new CardLayout(0, 0));
 		
 		GAPanel gaOption = new GAPanel();
 		PSOPanel psoOption = new PSOPanel();
-		options_panel.setLayout(new CardLayout(0, 0));
 		JPanel defaultOption = new JPanel();
+		Aveugle_panel aveuglePanel = new Aveugle_panel();
 
 		options_panel.add(defaultOption, "default");
 		options_panel.add(gaOption, "ga");
 		options_panel.add(psoOption, "pso");
+		options_panel.add(aveuglePanel, "aveugle");
 
 		
 		JLabel label_file_cnf = new JLabel("Fichier cnf");
@@ -115,7 +117,11 @@ public class Application_JFrame extends JFrame {
 		spinner_temps_max.setBounds(192, 302, 138, 20);
 		panel_donnes.add(spinner_temps_max);
 		
-		JButton btn_lancer = new JButton("New button");
+		JButton btn_lancer = new JButton("Lancer le test");
+		btn_lancer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_lancer.setBounds(10, 333, 145, 29);
 		panel_donnes.add(btn_lancer);
 		
@@ -123,8 +129,16 @@ public class Application_JFrame extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) options_panel.getLayout();
-				System.out.println(comboBox.getSelectedIndex());
 				switch(comboBox.getSelectedIndex()) {
+					case 0:
+						cardLayout.show(options_panel, "aveugle");
+						break;
+					case 1:
+						cardLayout.show(options_panel, "aveugle");
+						break;
+					case 2:
+						cardLayout.show(options_panel, "aveugle");
+						break;
 					case 3:
 						cardLayout.show(options_panel, "ga");
 						break;
