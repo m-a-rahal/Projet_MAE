@@ -14,6 +14,9 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Application_JFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -64,16 +67,22 @@ public class Application_JFrame extends JFrame {
 		JLabel algo_choix_label = new JLabel("Algorithme de recherche");
 		algo_choix_label.setBounds(10, 11, 320, 19);
 		panel_donnes.add(algo_choix_label);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Recherche en largeur d'abord (BFS)", "Recherche en profondeur d'abord (DFS)", "Recherche A*", "Algorithme PSO", "Algorithme génétique"}));
-		comboBox.setBounds(10, 41, 320, 22);
-		panel_donnes.add(comboBox);
+	
 		
 		JPanel options_panel = new JPanel();
 		options_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		options_panel.setBounds(10, 74, 320, 195);
 		panel_donnes.add(options_panel);
+		
+		GAPanel gaOption = new GAPanel();
+		PSOPanel psoOption = new PSOPanel();
+		options_panel.setLayout(new CardLayout(0, 0));
+		JPanel defaultOption = new JPanel();
+
+		options_panel.add(defaultOption, "default");
+		options_panel.add(gaOption, "ga");
+		options_panel.add(psoOption, "pso");
+
 		
 		JLabel label_file_cnf = new JLabel("Fichier cnf");
 		label_file_cnf.setBounds(340, 280, 54, 19);
@@ -97,18 +106,39 @@ public class Application_JFrame extends JFrame {
 		panel_donnes.add(lblNewLabel_1);
 		
 		JSpinner spinner_nbr_essais = new JSpinner();
-		spinner_nbr_essais.setModel(new SpinnerNumberModel(new Integer(3), new Integer(1), null, new Integer(1)));
+		spinner_nbr_essais.setModel(new SpinnerNumberModel(3, 1, null, 1));
 		spinner_nbr_essais.setBounds(192, 279, 138, 20);
 		panel_donnes.add(spinner_nbr_essais);
 		
 		JSpinner spinner_temps_max = new JSpinner();
-		spinner_temps_max.setModel(new SpinnerNumberModel(new Integer(2), new Integer(1), null, new Integer(1)));
+		spinner_temps_max.setModel(new SpinnerNumberModel(2, 1, null, 1));
 		spinner_temps_max.setBounds(192, 302, 138, 20);
 		panel_donnes.add(spinner_temps_max);
 		
 		JButton btn_lancer = new JButton("New button");
 		btn_lancer.setBounds(10, 333, 145, 29);
 		panel_donnes.add(btn_lancer);
+		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) options_panel.getLayout();
+				System.out.println(comboBox.getSelectedIndex());
+				switch(comboBox.getSelectedIndex()) {
+					case 3:
+						cardLayout.show(options_panel, "ga");
+						break;
+					case 4:
+						cardLayout.show(options_panel, "pso");
+						break;
+					default:
+						cardLayout.show(options_panel, "default");
+				}
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Recherche en largeur d'abord (BFS)", "Recherche en profondeur d'abord (DFS)", "Recherche A*", "Algorithme PSO", "Algorithme génétique"}));
+		comboBox.setBounds(10, 41, 320, 22);
+		panel_donnes.add(comboBox);
 		
 		ResultPanel panel_graphe = new ResultPanel();
 		tabbedPane.addTab("Résultats", null, panel_graphe, null);

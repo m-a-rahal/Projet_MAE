@@ -107,4 +107,14 @@ public class ClauseList extends ArrayList<Clause> {
 		}
 		return list;
 	}
+
+	public int getClauseSize() {
+		int max_size = 0;
+		for (Clause cls : this) {
+			if (max_size < cls.size()) {
+				max_size = cls.size();
+			}
+		}
+		return max_size;
+	}
 }
