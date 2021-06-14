@@ -84,7 +84,7 @@ Algorithme génétique
 		
 		clausesPanel = new ClausesPanel(this);
 		clausesPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		clausesPanel.setBounds(340, 41, 328, 228);
+		clausesPanel.setBounds(340, 41, 328, 257);
 		panel_donnes.add(clausesPanel);
 		
 		JLabel algo_choix_label = new JLabel("Algorithme de recherche");
@@ -94,7 +94,7 @@ Algorithme génétique
 		
 		JPanel options_panel = new JPanel();
 		options_panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		options_panel.setBounds(10, 74, 320, 195);
+		options_panel.setBounds(10, 74, 320, 224);
 		panel_donnes.add(options_panel);
 		options_panel.setLayout(new CardLayout(0, 0));
 		
@@ -110,11 +110,11 @@ Algorithme génétique
 
 		
 		JLabel label_file_cnf = new JLabel("Fichier cnf");
-		label_file_cnf.setBounds(340, 280, 54, 19);
+		label_file_cnf.setBounds(340, 309, 54, 19);
 		panel_donnes.add(label_file_cnf);
 		
 		textField_fichier_cnf = new JTextField();
-		textField_fichier_cnf.setBounds(395, 279, 190, 20);
+		textField_fichier_cnf.setBounds(395, 308, 190, 20);
 		panel_donnes.add(textField_fichier_cnf);
 		textField_fichier_cnf.setColumns(10);
 		
@@ -137,25 +137,25 @@ Algorithme génétique
 				} catch (NullPointerException ignore) {}
 			}
 		});
-		btn_choisir.setBounds(595, 278, 73, 23);
+		btn_choisir.setBounds(595, 307, 73, 23);
 		panel_donnes.add(btn_choisir);
 		
 		JLabel lblNewLabel = new JLabel("temps limite par essais (secondes)");
-		lblNewLabel.setBounds(10, 303, 172, 19);
+		lblNewLabel.setBounds(10, 332, 172, 19);
 		panel_donnes.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre d'essais");
-		lblNewLabel_1.setBounds(10, 280, 172, 19);
+		lblNewLabel_1.setBounds(10, 309, 172, 19);
 		panel_donnes.add(lblNewLabel_1);
 		
 		JSpinner spinner_nbr_essais = new JSpinner();
 		spinner_nbr_essais.setModel(new SpinnerNumberModel(3, 1, null, 1));
-		spinner_nbr_essais.setBounds(192, 279, 138, 20);
+		spinner_nbr_essais.setBounds(192, 308, 138, 20);
 		panel_donnes.add(spinner_nbr_essais);
 		
 		JSpinner spinner_temps_max = new JSpinner();
 		spinner_temps_max.setModel(new SpinnerNumberModel(2, 1, null, 1));
-		spinner_temps_max.setBounds(192, 302, 138, 20);
+		spinner_temps_max.setBounds(192, 331, 138, 20);
 		panel_donnes.add(spinner_temps_max);
 
 		
@@ -174,10 +174,10 @@ Algorithme génétique
 						cardLayout.show(options_panel, "aveugle");
 						break;
 					case PSO_INDEX:
-						cardLayout.show(options_panel, "ga");
+						cardLayout.show(options_panel, "pso");
 						break;
 					case GA_INDEX:
-						cardLayout.show(options_panel, "pso");
+						cardLayout.show(options_panel, "ga");
 						break;
 					default:
 						cardLayout.show(options_panel, "default");
@@ -200,7 +200,7 @@ Algorithme génétique
 
 				long startResolution;
 				long temps_max = Long.parseLong(spinner_temps_max.getValue().toString())*1000;
-				ClauseList clauses = clausesPanel.getClausesSet();
+				ClauseList clauses = clausesPanel.getClauses();
 				String methodName = "";
 
 				panel_graphe.setUpperBound(clauses.getN());
@@ -274,7 +274,7 @@ Algorithme génétique
 				tabbedPane.setEnabledAt(1, true);
 			}
 		});
-		btn_lancer.setBounds(10, 333, 145, 29);
+		btn_lancer.setBounds(10, 362, 145, 29);
 		btn_lancer.setEnabled(false);
 		panel_donnes.add(btn_lancer);
 

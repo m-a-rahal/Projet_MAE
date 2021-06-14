@@ -80,5 +80,5 @@ public class ClausesPanel extends JPanel{
 	}
 
 
-	public ClauseList getClausesSet() { return clauses; }
+	public ClauseList getClauses() { return clauses; }
 }
