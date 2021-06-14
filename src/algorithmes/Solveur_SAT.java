@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public abstract class Solveur_SAT {
 	Queue<Solution> ouvert;
-	ClauseList clauses;
+	public ClauseList clauses;
 	
 	
 	public Solution resoudre(ClauseList clauseList) { /** cette met*/

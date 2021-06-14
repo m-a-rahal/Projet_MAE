@@ -185,7 +185,7 @@ Algorithme génétique
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Recherche en largeur d'abord (BFS)", "Recherche en profondeur d'abord (DFS)", "Recherche A*", "Algorithme PSO", "Algorithme génétique"}));
-		comboBox.setSelectedIndex(0);
+		comboBox.setSelectedIndex(3);
 		comboBox.setBounds(10, 41, 320, 22);
 		panel_donnes.add(comboBox);
 		

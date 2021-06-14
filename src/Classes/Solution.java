@@ -118,4 +118,8 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		}
 		return diff;
 	}
+
+	public void flip(Integer i) {
+		set(i, -get(i));
+	}
 }
