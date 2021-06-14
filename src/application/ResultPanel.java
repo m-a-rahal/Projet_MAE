@@ -61,10 +61,13 @@ public class ResultPanel extends JPanel{
 		CategoryPlot plot = barChart.getCategoryPlot();
 
 		((BarRenderer) plot.getRenderer()).setBarPainter(new StandardBarPainter());
+		BarRenderer r = (BarRenderer)barChart.getCategoryPlot().getRenderer();
+	    r.setSeriesPaint(0, Color.blue);
 
 		plot.getDomainAxis().setMaximumCategoryLabelLines(10);
 
 		barChart.setBackgroundPaint(Color.decode("#D6D9DF"));
+		//barChart.setBorderPaint(Color.decode("#00FA81"));
 
 		CategoryItemRenderer CatRenderer = ((CategoryPlot) barChart.getPlot()).getRenderer();
 		CatRenderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
@@ -77,7 +80,7 @@ public class ResultPanel extends JPanel{
 		chartPanel.setRangeZoomable(false);
 		chartPanel.setPopupMenu(null);
 		chartPanel.setLayout(null);
-		chartPanel.setPreferredSize(new Dimension(680, 417));
+		chartPanel.setPreferredSize(new Dimension(680, 400));
 		add(chartPanel);
 
 		setBackground(Color.decode("#D6D9DF"));

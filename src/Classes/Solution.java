@@ -6,14 +6,14 @@ import java.util.Collection;
 public class Solution extends ArrayList<Integer> implements Comparable<Solution>{
 	private static final long serialVersionUID = 1L;
 	private static final Integer COMPLETITION_VALUE = null; /** utilisée pour compléter les solutions partielles, si null on complete la solution avec des x normales (pas des -x)*/
-	protected int f;
+	protected int fitness;
 	
 	public int getF() {
-		return f;
+		return fitness;
 	}
 
 	public void setF(int f) {
-		this.f = f;
+		this.fitness = f;
 	}
 
 	public Solution(int size) {
@@ -83,7 +83,7 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 	}
 
 	public int compareTo(Solution other) {
-		return this.f - other.getF();
+		return this.fitness - other.getF();
 	}
 	
 	@Override
@@ -92,8 +92,8 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		for (Integer x : this) {
 			text.append(x + " ");
 		}
-		if (f != 0)
-			text.append("(f = "+f+") ");
+		if (fitness != 0)
+			text.append("(f = "+fitness+") ");
 		return text.toString();
 	}
 
@@ -107,5 +107,19 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 			}
 		}
 		return s;
+	}
+
+	public int diff(Solution other) {
+		assert(this.size() == other.size());
+		int diff = 0;
+		for (int i = 0; i < size(); i++) {
+			if (this.get(i) != other.get(i))
+				diff++;
+		}
+		return diff;
+	}
+
+	public void flip(Integer i) {
+		set(i, -get(i));
 	}
 }
