@@ -7,21 +7,32 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+
 import java.awt.Color;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class Application_JFrame extends JFrame {
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private JTextField textField_fichier_cnf;
+	public static final long serialVersionUID = 1L;
+	public JPanel contentPane;
+	public JTextField textField_fichier_cnf;
+	public File file = null;
+	public JButton btn_lancer;
+	public Aveugle_panel aveuglePanel;
+	public ClausesPanel clausesPanel;
 
 	/**
 	 * Launch the application.
@@ -59,9 +70,9 @@ public class Application_JFrame extends JFrame {
 		tabbedPane.addTab("Entrées", null, panel_donnes, null);
 		panel_donnes.setLayout(null);
 		
-		JPanel clausesPanel = new JPanel();
+		clausesPanel = new ClausesPanel(this);
 		clausesPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		clausesPanel.setBounds(340, 11, 328, 258);
+		clausesPanel.setBounds(340, 41, 328, 228);
 		panel_donnes.add(clausesPanel);
 		
 		JLabel algo_choix_label = new JLabel("Algorithme de recherche");
@@ -78,7 +89,7 @@ public class Application_JFrame extends JFrame {
 		GAPanel gaOption = new GAPanel();
 		PSOPanel psoOption = new PSOPanel();
 		JPanel defaultOption = new JPanel();
-		Aveugle_panel aveuglePanel = new Aveugle_panel();
+		aveuglePanel = new Aveugle_panel(this);
 
 		options_panel.add(defaultOption, "default");
 		options_panel.add(gaOption, "ga");
@@ -95,7 +106,25 @@ public class Application_JFrame extends JFrame {
 		panel_donnes.add(textField_fichier_cnf);
 		textField_fichier_cnf.setColumns(10);
 		
+		JLabel information_label = new JLabel("");
+		information_label.setBounds(340, 3, 328, 35);
+		panel_donnes.add(information_label);
+		
+		
 		JButton btn_choisir = new JButton("choisir");
+		btn_choisir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+				fileChooser.setAcceptAllFileFilterUsed(false);
+				fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Conjunctive Normal Form (.cnf)", "cnf"));
+				fileChooser.showOpenDialog(null);
+
+				try {
+					information_label.setText(clausesPanel.loadClausesSet(fileChooser.getSelectedFile().getAbsolutePath()));					
+				} catch (NullPointerException ignore) {}
+			}
+		});
 		btn_choisir.setBounds(595, 278, 73, 23);
 		panel_donnes.add(btn_choisir);
 		
@@ -116,14 +145,7 @@ public class Application_JFrame extends JFrame {
 		spinner_temps_max.setModel(new SpinnerNumberModel(2, 1, null, 1));
 		spinner_temps_max.setBounds(192, 302, 138, 20);
 		panel_donnes.add(spinner_temps_max);
-		
-		JButton btn_lancer = new JButton("Lancer le test");
-		btn_lancer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btn_lancer.setBounds(10, 333, 145, 29);
-		panel_donnes.add(btn_lancer);
+
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ActionListener() {
@@ -151,11 +173,22 @@ public class Application_JFrame extends JFrame {
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Recherche en largeur d'abord (BFS)", "Recherche en profondeur d'abord (DFS)", "Recherche A*", "Algorithme PSO", "Algorithme génétique"}));
+		comboBox.setSelectedIndex(3);
 		comboBox.setBounds(10, 41, 320, 22);
 		panel_donnes.add(comboBox);
 		
 		ResultPanel panel_graphe = new ResultPanel();
 		tabbedPane.addTab("Résultats", null, panel_graphe, null);
 		//tabbedPane.setEnabledAt(1, false); // ########################################## enable this when results come
+		btn_lancer = new JButton("Lancer le test");
+		btn_lancer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btn_lancer.setBounds(10, 333, 145, 29);
+		btn_lancer.setEnabled(false);
+		panel_donnes.add(btn_lancer);
+
 	}
 }

@@ -4,11 +4,17 @@ import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
+
+import Classes.ClauseList;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Aveugle_panel extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -16,8 +22,10 @@ public class Aveugle_panel extends JPanel{
 	private JSpinner spinner_nbr_clauses;
 	private JComboBox<String> sat_comboBox;
 	private JButton btn_gen_alea;
+	private Application_JFrame parent;
 
-	public Aveugle_panel() {
+	public Aveugle_panel(Application_JFrame parent) {
+		this.parent = parent;
 		setLayout(null);
 		setBorder(new LineBorder(new Color(128, 128, 128), 2, true));
 		
@@ -27,7 +35,7 @@ public class Aveugle_panel extends JPanel{
 		add(sat_comboBox);
 		
 		spinner_nbr_variables = new JSpinner();
-		spinner_nbr_variables.setModel(new SpinnerNumberModel(1, 1, null, 1));
+		spinner_nbr_variables.setModel(new SpinnerNumberModel(new Integer(20), new Integer(1), null, new Integer(1)));
 		spinner_nbr_variables.setBounds(142, 11, 103, 23);
 		add(spinner_nbr_variables);
 		
@@ -40,11 +48,20 @@ public class Aveugle_panel extends JPanel{
 		add(lblNombreDeClauses);
 		
 		spinner_nbr_clauses = new JSpinner();
-		spinner_nbr_clauses.setModel(new SpinnerNumberModel(1,1,null,1));
+		spinner_nbr_clauses.setModel(new SpinnerNumberModel(new Integer(10), new Integer(1), null, new Integer(1)));
 		spinner_nbr_clauses.setBounds(142, 44, 103, 23);
 		add(spinner_nbr_clauses);
 		
 		btn_gen_alea = new JButton("générer des clauses aléatoirement");
+		btn_gen_alea.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int n  = parent.aveuglePanel.getNbrClauses();
+		        int m  = parent.aveuglePanel.getNbrVariables();
+		        boolean SAT = parent.aveuglePanel.getSAT();
+		        ClauseList clauses = new ClauseList(n,m).gen_aleat(SAT);
+				parent.clausesPanel.loadClausesSet(clauses);
+			}
+		});
 		btn_gen_alea.setBackground(new Color(124, 252, 0));
 		btn_gen_alea.setBounds(10, 111, 235, 23);
 		add(btn_gen_alea);

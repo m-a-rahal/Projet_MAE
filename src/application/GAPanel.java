@@ -18,43 +18,39 @@ public class GAPanel extends JPanel {
 		setLayout(null);
 		setBorder(new LineBorder(new Color(128, 128, 128), 2, true));
 	
-		JLabel populationSizeLabel = new JLabel("\u2022 Population size :");
+		JLabel populationSizeLabel = new JLabel("Taille de la population");
 		populationSizeLabel.setBounds(15, 19, 109, 25);
 		add(populationSizeLabel);
 		
-		populationSizeSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
-		populationSizeSpinner.setBounds(123, 20, 61, 23);
+		populationSizeSpinner = new JSpinner(new SpinnerNumberModel(40, 1, 100, 1));
+		populationSizeSpinner.setBounds(154, 20, 84, 23);
 		add(populationSizeSpinner);
 
-		JLabel crossoverRateLabel = new JLabel("\u2022 Crossover rate :");
+		JLabel crossoverRateLabel = new JLabel("Taux de croisement");
 		crossoverRateLabel.setBounds(15, 63, 109, 25);
 		add(crossoverRateLabel);
 
-		crossoverRateSpinner = new JSpinner(new SpinnerNumberModel(100, 1, 100, 1));
-		crossoverRateSpinner.setBounds(123, 64, 61, 23);
+		crossoverRateSpinner = new JSpinner(new SpinnerNumberModel(90, 0, 100, 1));
+		crossoverRateSpinner.setBounds(154, 64, 84, 23);
 		add(crossoverRateSpinner);
 
-		JLabel percentageCrossoverLabel = new JLabel("%");
-		percentageCrossoverLabel.setBounds(189, 63, 17, 25);
-		add(percentageCrossoverLabel);
-
-		JLabel mutationRateLabel = new JLabel("\u2022 Mutation rate :");
+		JLabel mutationRateLabel = new JLabel("Taux de mutation");
 		mutationRateLabel.setBounds(15, 107, 99, 25);
 		add(mutationRateLabel);
 		
-		mutationRateSpinner = new JSpinner(new SpinnerNumberModel(31, 1, 100, 1));
-		mutationRateSpinner.setBounds(113, 108, 61, 23);
+		mutationRateSpinner = new JSpinner(new SpinnerNumberModel(20, 0, 100, 1));
+		mutationRateSpinner.setBounds(154, 108, 84, 23);
 		add(mutationRateSpinner);
 		
 		JLabel percentageMutationLabel = new JLabel("%");
 		percentageMutationLabel.setBounds(179, 107, 17, 25);
 		add(percentageMutationLabel);
 		
-		JLabel numIterGaLabel = new JLabel("\u2022 Number of iterations :");
+		JLabel numIterGaLabel = new JLabel("Nombre d'itérations");
 		numIterGaLabel.setBounds(16, 151, 139, 25);
 		add(numIterGaLabel);
 
-		numIterGaSpinner = new JSpinner(new SpinnerNumberModel(3900, 1, 1000000, 1));
+		numIterGaSpinner = new JSpinner(new SpinnerNumberModel(new Integer(10000), new Integer(1), null, new Integer(1)));
 		numIterGaSpinner.setBounds(154, 152, 84, 23);
 		add(numIterGaSpinner);
 	}

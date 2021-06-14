@@ -89,7 +89,7 @@ public class ClauseList extends ArrayList<Clause> {
 
 	private int[] var_subset(int subset_size) {
 		ArrayList<Integer> X =  new ArrayList<>(m);
-		for (int i = 0; i < m; i++) {
+		for (int i = 1; i <= m; i++) {
 			X.add(i);
 		}
 		Collections.shuffle(X);
