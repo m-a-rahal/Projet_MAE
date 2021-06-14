@@ -1,6 +1,5 @@
 package application;
 import java.awt.BorderLayout;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,7 +16,7 @@ public class ClausesPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	private JTable clausesTable;
-	private ClauseList clset;
+	private ClauseList clauses;
 	public Application_JFrame parent;
 
 	public ClausesPanel(Application_JFrame parent) {
@@ -42,18 +41,19 @@ public class ClausesPanel extends JPanel{
 		return show_clause_list(clset, true); // true --> sort 
 	}
 	
-	private String show_clause_list(ClauseList clset, boolean sort) {
+	private String show_clause_list(ClauseList clauses, boolean sort) {
+		this.clauses = clauses;
 		DefaultTableModel tableModel = new DefaultTableModel();
 		tableModel.addColumn("num clause");
 
-		for(int i=0; i<clset.getClauseSize(); i++)
+		for(int i=0; i<clauses.getClauseSize(); i++)
 			tableModel.addColumn(""+(i+1));
 
-		String[] tableRow = new String[clset.getClauseSize()+1];
+		String[] tableRow = new String[clauses.getClauseSize()+1];
 
-		for(int i=0; i<clset.getN(); i++) {
+		for(int i=0; i<clauses.getN(); i++) {
 			tableRow[0] = String.valueOf(i+1);
-			ArrayList<Integer> littetrals = new ArrayList<>(clset.get(i));
+			ArrayList<Integer> littetrals = new ArrayList<>(clauses.get(i));
 			if (sort)
 				Collections.sort(littetrals, new Comparator<Integer>() {
 					@Override
@@ -76,9 +76,9 @@ public class ClausesPanel extends JPanel{
 
 		clausesTable.setModel(tableModel);
 
-		return "nbr_variables = "+clset.getM()+", nbr_clauses = "+clset.getN();
+		return "nbr_variables = "+clauses.getM()+", nbr_clauses = "+clauses.getN();
 	}
 
 
-	public ClauseList getClausesSet() { return clset; }
+	public ClauseList getClausesSet() { return clauses; }
 }

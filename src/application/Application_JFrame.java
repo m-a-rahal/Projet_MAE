@@ -1,38 +1,50 @@
 package application;
 
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-
-import java.awt.Color;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import java.awt.CardLayout;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.awt.event.ActionEvent;
+import Classes.ClauseList;
+import algorithmes.A_star;
+import algorithmes.BFS;
+import algorithmes.DFS;
+import algorithmes.GA;
+import algorithmes.PSO;
 
 public class Application_JFrame extends JFrame {
 	public static final long serialVersionUID = 1L;
+	/*Recherche en largeur d'abord (BFS)
+Recherche en profondeur d'abord (DFS)
+Recherche A*
+Algorithme PSO
+Algorithme génétique
+	 * */
+	public static final int BFS_INDEX=0, DFS_INDEX=1, A_STAR_INDEX=2, PSO_INDEX=3, GA_INDEX=4;
 	public JPanel contentPane;
 	public JTextField textField_fichier_cnf;
 	public File file = null;
 	public JButton btn_lancer;
 	public Aveugle_panel aveuglePanel;
 	public ClausesPanel clausesPanel;
+	//protected ClauseList clauses;
 
 	/**
 	 * Launch the application.
@@ -152,19 +164,19 @@ public class Application_JFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) options_panel.getLayout();
 				switch(comboBox.getSelectedIndex()) {
-					case 0:
+					case BFS_INDEX:
 						cardLayout.show(options_panel, "aveugle");
 						break;
-					case 1:
+					case DFS_INDEX:
 						cardLayout.show(options_panel, "aveugle");
 						break;
-					case 2:
+					case A_STAR_INDEX:
 						cardLayout.show(options_panel, "aveugle");
 						break;
-					case 3:
+					case PSO_INDEX:
 						cardLayout.show(options_panel, "ga");
 						break;
-					case 4:
+					case GA_INDEX:
 						cardLayout.show(options_panel, "pso");
 						break;
 					default:
@@ -173,7 +185,7 @@ public class Application_JFrame extends JFrame {
 			}
 		});
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Recherche en largeur d'abord (BFS)", "Recherche en profondeur d'abord (DFS)", "Recherche A*", "Algorithme PSO", "Algorithme génétique"}));
-		comboBox.setSelectedIndex(3);
+		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(10, 41, 320, 22);
 		panel_donnes.add(comboBox);
 		
@@ -183,7 +195,83 @@ public class Application_JFrame extends JFrame {
 		btn_lancer = new JButton("Lancer le test");
 		btn_lancer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
+				panel_graphe.clearData();
+
+				long startResolution;
+				long temps_max = Long.parseLong(spinner_temps_max.getValue().toString())*1000;
+				ClauseList clauses = clausesPanel.getClausesSet();
+				String methodName = "";
+
+				panel_graphe.setUpperBound(clauses.getN());
+
+				switch(comboBox.getSelectedIndex()) {
+					case DFS_INDEX:
+						//informationLabel.setText("SAT instance resolved using \"Depth-First Search (DFS)\"");
+						methodName = "DFS";
+
+						for(int i=0; i< Integer.parseInt(spinner_nbr_essais.getValue().toString()); i++) {
+							startResolution = System.currentTimeMillis();
+							panel_graphe.addData(clauses, new DFS().resoudre(clauses, temps_max),
+												System.currentTimeMillis() - startResolution > temps_max ? temps_max : System.currentTimeMillis() - startResolution, i+1);
+						}
+
+						break;
+
+					case BFS_INDEX:
+						//informationLabel.setText("SAT instance resolved using \"Breadth-First Search (BFS)\"");
+						methodName = "BFS";
+
+						for(int i=0; i< Integer.parseInt(spinner_nbr_essais.getValue().toString()); i++) {
+							startResolution = System.currentTimeMillis();
+							panel_graphe.addData(clauses, new BFS().resoudre(clauses, temps_max),
+												System.currentTimeMillis() - startResolution > temps_max ? temps_max : System.currentTimeMillis() - startResolution, i+1);
+						}
+
+						break;
+
+					case A_STAR_INDEX:
+						/* "heuristicOptions" was disabled until other heuristics will be added */
+						// informationLabel.setText("SAT instance resolved using \"Heuristic "+heuristicOption.getSelectedHeuristicRadio()+"\"");
+						//informationLabel.setText("SAT instance resolved using \"Heuristic search (A*)\"");
+						methodName = "A*";
+
+						for(int i=0; i< Integer.parseInt(spinner_nbr_essais.getValue().toString()); i++) {
+							startResolution = System.currentTimeMillis();
+							panel_graphe.addData(clauses, new A_star().resoudre(clauses, temps_max),
+									System.currentTimeMillis() - startResolution > temps_max ? temps_max : System.currentTimeMillis() - startResolution, i+1);
+						}
+
+						break;
+
+					case GA_INDEX:
+						//informationLabel.setText("SAT instance resolved using \"Genetic Algorithm (GA)\"");
+						methodName = "GA";
+
+						for(int i=0; i< Integer.parseInt(spinner_nbr_essais.getValue().toString()); i++) {
+							startResolution = System.currentTimeMillis();
+							panel_graphe.addData(clauses, new GA(gaOption.getPopulationSize(), gaOption.getCrossoverRate(), gaOption.getMutationRate(),
+									gaOption.getnumIterGa()).resoudre(clauses, temps_max),
+												System.currentTimeMillis() - startResolution > temps_max ? temps_max : System.currentTimeMillis() - startResolution, i+1);
+						}
+
+						break;
+
+					case PSO_INDEX:
+						//informationLabel.setText("SAT instance resolved using \"Particle Swarm Optimization (PSO)\"");
+						methodName = "PSO";
+
+						for(int i=0; i< Integer.parseInt(spinner_nbr_essais.getValue().toString()); i++) {
+							startResolution = System.currentTimeMillis();
+							panel_graphe.addData(clauses, new PSO(psoOption.getNumParticles(), psoOption.getConstant1(),
+									psoOption.getConstant2(), psoOption.getInWeight(), psoOption.getNumIterPso()).resoudre(clauses, temps_max),
+												System.currentTimeMillis() - startResolution > temps_max ? temps_max : System.currentTimeMillis() - startResolution, i+1);
+						}
+				}
+
+				panel_graphe.makeTitle(methodName);
+
+				tabbedPane.setEnabledAt(1, true);
 			}
 		});
 		btn_lancer.setBounds(10, 333, 145, 29);

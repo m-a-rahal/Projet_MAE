@@ -2,6 +2,9 @@ package Home;
 
 import Classes.ClauseList;
 import Classes.table_cnf_clause;
+import algorithmes.A_star;
+import algorithmes.BFS;
+import algorithmes.DFS;
 import io_classes.FileManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,9 +18,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import partie1.A_star;
-import partie1.BFS;
-import partie1.DFS;
 
 import java.io.*;
 import java.net.URL;

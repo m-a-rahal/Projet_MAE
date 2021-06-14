@@ -1,7 +1,7 @@
 package io_classes;
 
 import Classes.ClauseList;
-import partie1.Solveur_constructif;
+import algorithmes.Solveur_SAT;
 
 public class Tester {
 	protected String output_file;
@@ -16,7 +16,7 @@ public class Tester {
 		this.max_m = max_m;
 	}
 	
-	public void tester(Solveur_constructif solveur) {
+	public void tester(Solveur_SAT solveur) {
 		// sat instances
 		boolean SAT = true;
 		loop(solveur, SAT);
@@ -26,12 +26,12 @@ public class Tester {
 		loop(solveur, SAT);
 	}
 	
-	public void tester(Solveur_constructif solveur, boolean SAT) {
+	public void tester(Solveur_SAT solveur, boolean SAT) {
 		SAT = false;
 		loop(solveur, SAT);
 	}
 	
-	public void loop(Solveur_constructif solveur, boolean SAT) {
+	public void loop(Solveur_SAT solveur, boolean SAT) {
 		for (int m = min_m; m <= max_m; m++) {
 			for (int n = min_n; n <= max_n; n++) {
 				ClauseList clauses = new ClauseList(n, m).gen_aleat(SAT);

@@ -1,13 +1,13 @@
-package main;
+package test;
 
 import Classes.ClauseList;
+import algorithmes.A_star;
+import algorithmes.BFS;
+import algorithmes.DFS;
 import io_classes.FileManager;
 import io_classes.Tester;
-import partie1.A_star;
-import partie1.BFS;
-import partie1.DFS;
 
-public class SAT_MAIN {
+public class SAT_TEST {
 	
 	static String ex_sat = "E:/_Mohamed_/USTHB/M1_SII (REDO)/S2 2021/RC/TP/TP1 - Solveur SAT/programme inference/bc_2.cnf";
 	public static void main(String[] args) {

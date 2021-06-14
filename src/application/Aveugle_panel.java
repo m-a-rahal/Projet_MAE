@@ -1,10 +1,11 @@
 package application;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -13,19 +14,14 @@ import javax.swing.border.LineBorder;
 
 import Classes.ClauseList;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class Aveugle_panel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JSpinner spinner_nbr_variables;
 	private JSpinner spinner_nbr_clauses;
 	private JComboBox<String> sat_comboBox;
 	private JButton btn_gen_alea;
-	private Application_JFrame parent;
 
 	public Aveugle_panel(Application_JFrame parent) {
-		this.parent = parent;
 		setLayout(null);
 		setBorder(new LineBorder(new Color(128, 128, 128), 2, true));
 		
