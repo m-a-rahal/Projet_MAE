@@ -27,6 +27,7 @@ import Classes.Solution;
 
 public class ResultPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
+	Application_JFrame parent;
 
 
 	public class Result{ /* Internal class */
@@ -52,7 +53,8 @@ public class ResultPanel extends JPanel{
 	private JFreeChart barChart;
 	private ArrayList<Result> resultData;
 
-	public ResultPanel() {
+	public ResultPanel(Application_JFrame parent) {
+		this.parent = parent;
 		this.dataset = new DefaultCategoryDataset();
 		this.resultData = new ArrayList<Result>();
 
@@ -94,6 +96,7 @@ public class ResultPanel extends JPanel{
 
 	public void addData(ClauseList clset, Solution solution, long time, int numAttempt) {
 		Result result = new Result(clset, solution, time);
+		parent.textField_solution.setText(solution.toString());
 
 		resultData.add(result);
 		this.dataset.setValue(solution.sat_count(clset), "SAT", "Attempt "+numAttempt+"\n("+round(time/1000.0, 2)+"  sec)");

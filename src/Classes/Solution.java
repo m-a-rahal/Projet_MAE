@@ -92,8 +92,8 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		for (Integer x : this) {
 			text.append(x + " ");
 		}
-		if (fitness != 0)
-			text.append("(f = "+fitness+") ");
+		/*if (fitness != 0)
+			text.append("(f = "+fitness+") ");*/
 		return text.toString();
 	}
 
