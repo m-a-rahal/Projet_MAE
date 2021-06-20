@@ -38,7 +38,7 @@ public class ResultPanel extends JPanel{
 
 		public Result(ClauseList clset, Classes.Solution solution, long time) {
 			this.solution = solution;
-			this.satisfiability = (float)solution.sat_count(clset)/clset.getN();
+			this.satisfiability = solution != null ? (float)solution.sat_count(clset)/clset.getN() : 0;
 			this.time = time;
 		}
 
@@ -96,10 +96,10 @@ public class ResultPanel extends JPanel{
 
 	public void addData(ClauseList clset, Solution solution, long time, int numAttempt) {
 		Result result = new Result(clset, solution, time);
-		parent.textField_solution.setText(solution.toString());
+		parent.textField_solution.setText(solution != null ? solution.toString() : "pas do solution (non SAT)");
 
 		resultData.add(result);
-		this.dataset.setValue(solution.sat_count(clset), "SAT", "essais "+numAttempt+"\n("+round(time/1000.0, 2)+" s)");
+		this.dataset.setValue(solution != null ? solution.sat_count(clset) : 0, "SAT", "essais "+numAttempt+"\n("+round(time/1000.0, 2)+" s)");
 	}
 
 

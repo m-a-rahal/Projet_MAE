@@ -28,14 +28,10 @@ public class Particule  {
 		vitesse = Math.min(solution.size(), vitesse); // vitesse max = m
 	}
 	
-	public void updatePos() {
-		ArrayList<Integer> ouvert = new ArrayList<Integer>(solution.size());
-		for(int i=0; i < solution.size(); i++)			
-			ouvert.add(i);
-
-		Collections.shuffle(ouvert);
+	public void updatePos(ArrayList<Integer> positions) {// flip random positions of the solution
+		Collections.shuffle(positions);
 		for(int i=0; i< vitesse; i++)
-			solution.flip(ouvert.remove(ouvert.size()-1));
+			solution.flip(positions.get(i));
 		
 		solution.setF(solution.sat_count(swarm.clauses));
 	}

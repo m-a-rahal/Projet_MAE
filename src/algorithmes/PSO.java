@@ -37,13 +37,17 @@ public class PSO extends Solveur_SAT {
 				gbest = particles.get(i).getSolution();
 		}
 		
+		ArrayList<Integer> positions = new ArrayList<Integer>(clauses.getM());
+		for(int i=0; i < clauses.getM(); i++)			
+			positions.add(i);
+		
 		for(int i=0; i< max_iter; i++) {
 			if((System.currentTimeMillis() - t0) >= temps_max)
 				break; /* If the search time has reached (or exceeded) the allowed run time, finish the search */
 
 			for(Particule particle : particles) {
 				particle.updateVitesse();
-				particle.updatePos();
+				particle.updatePos(positions);
 				particle.updatePbest();
 			}
 
