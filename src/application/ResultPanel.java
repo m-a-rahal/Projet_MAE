@@ -58,7 +58,7 @@ public class ResultPanel extends JPanel{
 		this.dataset = new DefaultCategoryDataset();
 		this.resultData = new ArrayList<Result>();
 
-		barChart = ChartFactory.createBarChart("", "", "Satisfied clauses", this.dataset, PlotOrientation.VERTICAL, false, false, false);
+		barChart = ChartFactory.createBarChart("", "", "Nombre de clauses satisfaites", this.dataset, PlotOrientation.VERTICAL, false, false, false);
 
 		CategoryPlot plot = barChart.getCategoryPlot();
 
@@ -99,7 +99,7 @@ public class ResultPanel extends JPanel{
 		parent.textField_solution.setText(solution.toString());
 
 		resultData.add(result);
-		this.dataset.setValue(solution.sat_count(clset), "SAT", "Attempt "+numAttempt+"\n("+round(time/1000.0, 2)+"  sec)");
+		this.dataset.setValue(solution.sat_count(clset), "SAT", "essais "+numAttempt+"\n("+round(time/1000.0, 2)+" s)");
 	}
 
 
@@ -131,8 +131,7 @@ public class ResultPanel extends JPanel{
 
 	public void makeTitle(String searchMethodName) {
 		if(! resultData.isEmpty())
-			this.barChart.setTitle("Satisfied clauses per attempt (using \""+searchMethodName+"\")\nSatisfiability rate :  "+getSatisfiabilityRate()+" %  ("
-									+getAverageSearchTime()/1000+"  sec)");
+			this.barChart.setTitle("Nombre de clauses satisfaites pour l'algorithme "+searchMethodName+"\ntaux de clauses satisfaites = "+getSatisfiabilityRate()+"%");
 	}
 
 

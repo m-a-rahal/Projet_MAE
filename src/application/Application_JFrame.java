@@ -207,7 +207,7 @@ Algorithme génétique
 		panel_resultats.add(lblNewLabel_2);
 		
 		textField_solution = new JTextField();
-		textField_solution.setBounds(66, 429, 612, 20);
+		textField_solution.setBounds(66, 429, 602, 20);
 		panel_resultats.add(textField_solution);
 		textField_solution.setColumns(10);
 		//tabbedPane.setEnabledAt(1, false); // ########################################## enable this when results come

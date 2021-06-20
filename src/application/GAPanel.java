@@ -22,7 +22,7 @@ public class GAPanel extends JPanel {
 		populationSizeLabel.setBounds(15, 19, 109, 25);
 		add(populationSizeLabel);
 		
-		populationSizeSpinner = new JSpinner(new SpinnerNumberModel(40, 1, 100, 1));
+		populationSizeSpinner = new JSpinner(new SpinnerNumberModel(200, 1, null, 1));
 		populationSizeSpinner.setBounds(154, 20, 84, 23);
 		add(populationSizeSpinner);
 
@@ -30,7 +30,7 @@ public class GAPanel extends JPanel {
 		crossoverRateLabel.setBounds(15, 63, 109, 25);
 		add(crossoverRateLabel);
 
-		crossoverRateSpinner = new JSpinner(new SpinnerNumberModel(90, 0, 100, 1));
+		crossoverRateSpinner = new JSpinner(new SpinnerNumberModel(98, 0, 100, 1));
 		crossoverRateSpinner.setBounds(154, 64, 84, 23);
 		add(crossoverRateSpinner);
 
@@ -38,7 +38,7 @@ public class GAPanel extends JPanel {
 		mutationRateLabel.setBounds(15, 107, 99, 25);
 		add(mutationRateLabel);
 		
-		mutationRateSpinner = new JSpinner(new SpinnerNumberModel(20, 0, 100, 1));
+		mutationRateSpinner = new JSpinner(new SpinnerNumberModel(40, 0, 100, 1));
 		mutationRateSpinner.setBounds(154, 108, 84, 23);
 		add(mutationRateSpinner);
 		
