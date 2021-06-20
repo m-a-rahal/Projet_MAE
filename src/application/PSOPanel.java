@@ -26,19 +26,22 @@ public class PSOPanel extends JPanel{
         setLayout(null);
         setBorder(new LineBorder(new Color(128, 128, 128), 2, true));
 
+        Double step = new Double(0.1);
+        Double inital_c = new Double(0.2);
+        Double inital_w = new Double(0.4);
         numParticlesSpinner = new JSpinner(new SpinnerNumberModel(new Integer(50), new Integer(1), null, new Integer(1)));
         numParticlesSpinner.setBounds(149, 13, 79, 23);
         add(numParticlesSpinner);
 
-        constant1Spinner = new JSpinner(new SpinnerNumberModel(1, 0, 2, 1));
+        constant1Spinner = new JSpinner(new SpinnerNumberModel(inital_c, 0.0, null, step));
         constant1Spinner.setBounds(149, 48, 79, 23);
         add(constant1Spinner);
 
-        constant2Spinner = new JSpinner(new SpinnerNumberModel(0, 0, 2, 1));
+        constant2Spinner = new JSpinner(new SpinnerNumberModel(inital_c, 0.0, null, step));
         constant2Spinner.setBounds(149, 82, 79, 23);
         add(constant2Spinner);
 
-        inWeightSpinner = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
+        inWeightSpinner = new JSpinner(new SpinnerNumberModel(inital_w, new Double(0), new Double(1), step));
         inWeightSpinner.setBounds(149, 116, 79, 23);
         add(inWeightSpinner);
 
@@ -69,11 +72,11 @@ public class PSOPanel extends JPanel{
 
     public int getNumParticles() { return Integer.parseInt(numParticlesSpinner.getValue().toString()); }
 
-    public int getConstant1() { return Integer.parseInt(constant1Spinner.getValue().toString()); }
+    public double getConstant1() { return Double.parseDouble(constant1Spinner.getValue().toString()); }
 
-    public int getConstant2() { return Integer.parseInt(constant2Spinner.getValue().toString()); }
+    public double getConstant2() { return Double.parseDouble(constant2Spinner.getValue().toString()); }
 
-    public int getInWeight() { return Integer.parseInt(inWeightSpinner.getValue().toString()); }
+    public double getInWeight() { return Double.parseDouble(inWeightSpinner.getValue().toString()); }
 
     public int getNumIterPso() { return Integer.parseInt(numIterPsoSpinner.getValue().toString()); }
 }

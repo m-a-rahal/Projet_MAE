@@ -92,8 +92,8 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		for (Integer x : this) {
 			text.append(x + " ");
 		}
-		if (fitness != 0)
-			text.append("(f = "+fitness+") ");
+		/*if (fitness != 0)
+			text.append("(f = "+fitness+") ");*/
 		return text.toString();
 	}
 
@@ -108,6 +108,17 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		}
 		return s;
 	}
+	
+	public Solution self_gen_alea(int m) {
+		for (int i = 0; i < m; i++) {
+			if (Math.random() > 0.5) {
+				add(i+1);
+			} else {
+				add(-(i+1));
+			}
+		}
+		return this;
+	}
 
 	public int diff(Solution other) {
 		assert(this.size() == other.size());
@@ -121,5 +132,14 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 
 	public void flip(Integer i) {
 		set(i, -get(i));
+	}
+
+	public boolean egale(Solution other) {
+		for (int i = 0; i < size(); i++) {
+			if (get(i) != other.get(i)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

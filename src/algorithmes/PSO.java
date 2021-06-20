@@ -6,10 +6,11 @@ import Classes.Particule;
 import Classes.Solution;
 
 public class PSO extends Solveur_SAT {
-	public int N, c1, c2, poids, max_iter;
+	public int N, max_iter;
+	public double c1, c2, poids;
 	public Solution gbest;
 
-	public PSO(int N, int c1, int c2, int poids, int max_iter) {
+	public PSO(int N, double c1, double c2, double poids, int max_iter) {
 		this.N = N;
 		this.c1 = c1;
 		this.c2 = c2;

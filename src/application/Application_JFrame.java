@@ -28,6 +28,7 @@ import algorithmes.BFS;
 import algorithmes.DFS;
 import algorithmes.GA;
 import algorithmes.PSO;
+import java.awt.FlowLayout;
 
 public class Application_JFrame extends JFrame {
 	public static final long serialVersionUID = 1L;
@@ -44,6 +45,7 @@ Algorithme génétique
 	public JButton btn_lancer;
 	public Aveugle_panel aveuglePanel;
 	public ClausesPanel clausesPanel;
+	public JTextField textField_solution;
 	//protected ClauseList clauses;
 
 	/**
@@ -68,14 +70,14 @@ Algorithme génétique
 	public Application_JFrame() {
 		setTitle("Solveur SAT");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 699, 467);
+		setBounds(100, 100, 699, 526);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 683, 430);
+		tabbedPane.setBounds(0, 0, 683, 487);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel_donnes = new JPanel();
@@ -133,7 +135,9 @@ Algorithme génétique
 				fileChooser.showOpenDialog(null);
 
 				try {
-					information_label.setText(clausesPanel.loadClausesSet(fileChooser.getSelectedFile().getAbsolutePath()));					
+					String file_path = fileChooser.getSelectedFile().getAbsolutePath();	
+					textField_fichier_cnf.setText(file_path);
+					information_label.setText(clausesPanel.loadClausesSet(file_path));
 				} catch (NullPointerException ignore) {}
 			}
 		});
@@ -149,12 +153,12 @@ Algorithme génétique
 		panel_donnes.add(lblNewLabel_1);
 		
 		JSpinner spinner_nbr_essais = new JSpinner();
-		spinner_nbr_essais.setModel(new SpinnerNumberModel(3, 1, null, 1));
+		spinner_nbr_essais.setModel(new SpinnerNumberModel(4, 1, null, 1));
 		spinner_nbr_essais.setBounds(192, 308, 138, 20);
 		panel_donnes.add(spinner_nbr_essais);
 		
 		JSpinner spinner_temps_max = new JSpinner();
-		spinner_temps_max.setModel(new SpinnerNumberModel(2, 1, null, 1));
+		spinner_temps_max.setModel(new SpinnerNumberModel(new Double(0.5), new Double(0.1), null, new Double(0.1)));
 		spinner_temps_max.setBounds(192, 331, 138, 20);
 		panel_donnes.add(spinner_temps_max);
 
@@ -189,8 +193,23 @@ Algorithme génétique
 		comboBox.setBounds(10, 41, 320, 22);
 		panel_donnes.add(comboBox);
 		
-		ResultPanel panel_graphe = new ResultPanel();
-		tabbedPane.addTab("Résultats", null, panel_graphe, null);
+		JPanel panel_resultats = new JPanel();
+		
+		tabbedPane.addTab("Résultats", null, panel_resultats, null);
+		panel_resultats.setLayout(null);
+		
+		ResultPanel panel_graphe = new ResultPanel(this);
+		panel_graphe.setBounds(0, 0, 678, 421);
+		panel_resultats.add(panel_graphe);
+		
+		JLabel lblNewLabel_2 = new JLabel("Solution");
+		lblNewLabel_2.setBounds(10, 432, 46, 14);
+		panel_resultats.add(lblNewLabel_2);
+		
+		textField_solution = new JTextField();
+		textField_solution.setBounds(66, 429, 602, 20);
+		panel_resultats.add(textField_solution);
+		textField_solution.setColumns(10);
 		//tabbedPane.setEnabledAt(1, false); // ########################################## enable this when results come
 		btn_lancer = new JButton("Lancer le test");
 		btn_lancer.addActionListener(new ActionListener() {
@@ -199,7 +218,7 @@ Algorithme génétique
 				panel_graphe.clearData();
 
 				long startResolution;
-				long temps_max = Long.parseLong(spinner_temps_max.getValue().toString())*1000;
+				long temps_max = (long)(Double.parseDouble(spinner_temps_max.getValue().toString())*1000);
 				ClauseList clauses = clausesPanel.getClauses();
 				String methodName = "";
 
