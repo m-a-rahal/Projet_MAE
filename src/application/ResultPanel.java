@@ -28,15 +28,18 @@ import Classes.Solution;
 public class ResultPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	Application_JFrame parent;
+	Solution best;
 
 
 	public class Result{ /* Internal class */
-		private Classes.Solution solution;
+		private Solution solution;
 		private float satisfiability;
 		private long time;
+		private ClauseList clset;
 
 
 		public Result(ClauseList clset, Classes.Solution solution, long time) {
+			this.clset = clset;
 			this.solution = solution;
 			this.satisfiability = solution != null ? (float)solution.sat_count(clset)/clset.getN() : 0;
 			this.time = time;
@@ -96,7 +99,11 @@ public class ResultPanel extends JPanel{
 
 	public void addData(ClauseList clset, Solution solution, long time, int numAttempt) {
 		Result result = new Result(clset, solution, time);
-		parent.textField_solution.setText(solution != null ? solution.toString() : "pas do solution (non SAT)");
+		if (solution != null)
+		if (best == null || solution.sat_count(clset) > best.sat_count(clset)) {
+			best = solution;
+		}
+		parent.textField_solution.setText(best != null ? best.toString() : "pas do solution (non SAT)");
 
 		resultData.add(result);
 		this.dataset.setValue(solution != null ? solution.sat_count(clset) : 0, "SAT", "essais "+numAttempt+"\n("+round(time/1000.0, 2)+" s)");
@@ -106,6 +113,8 @@ public class ResultPanel extends JPanel{
 	public void clearData() {
 		resultData.clear();
 		dataset.clear();
+		best = null;
+		parent.textField_solution.setText("");
 	}
 
 
@@ -113,9 +122,9 @@ public class ResultPanel extends JPanel{
 		float sumSatisfiedClausesPerAttempt = 0;
 
 		for(int i=0; i<resultData.size(); i++)
-			sumSatisfiedClausesPerAttempt += resultData.get(i).getSatisfiability();
+			sumSatisfiedClausesPerAttempt = Math.max(resultData.get(i).getSatisfiability(), sumSatisfiedClausesPerAttempt);
 
-		return round(100*sumSatisfiedClausesPerAttempt/resultData.size(), 7);
+		return round(100*sumSatisfiedClausesPerAttempt, 7);
 	}
 
 

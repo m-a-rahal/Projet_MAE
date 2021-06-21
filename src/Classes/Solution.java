@@ -63,9 +63,18 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 	}
 	
 	public boolean satisfie_clause(Clause clause) {
-		for (Integer x : this) {
+		/*for (Integer x : this) {
 			if (clause.contains(x))
 				return true;
+		}*/ // old and not optimized for 3 sat
+		int i;
+		for (Integer x : clause) { // optimized for 3 sat
+			i = Math.abs(x) - 1;
+			if (this.size() >= i+1) {
+				if (get(i) == x) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
