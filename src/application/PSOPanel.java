@@ -5,10 +5,6 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
-import javax.swing.SpinnerModel;
-import javax.swing.JCheckBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class PSOPanel extends JPanel{
     private static final long serialVersionUID = 1L;

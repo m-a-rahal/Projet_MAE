@@ -14,8 +14,8 @@ public class Individus extends Solution {
 	}
 
 
-	public void muter(ClauseList clauses, Integer remove) {
-		// TODO Auto-generated method stub
-		
+	public void muter(ClauseList clauses, int position) {
+		flip(position);
+		fitness = sat_count(clauses);
 	}
 }

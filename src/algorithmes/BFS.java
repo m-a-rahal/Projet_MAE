@@ -1,10 +1,8 @@
 package algorithmes;
 
-import Classes.ClauseList;
 import Classes.Solution;
 
 import java.util.LinkedList;
-import java.util.Stack;
 
 
 public class BFS extends Solveur_SAT {

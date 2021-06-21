@@ -245,7 +245,8 @@ public class Controller implements Initializable {
             super("A_Star");
             this.file = file;
         }
-        public void run(){
+        @Override
+		public void run(){
 //            try {
                 temps_a_star = new A_star().temps_execution(this.file);
                 System.out.println(temps_a_star + " s");
@@ -276,7 +277,8 @@ public class Controller implements Initializable {
             super("BFS");
             this.file = file;
         }
-        public void run(){
+        @Override
+		public void run(){
             temps_bfs = new BFS().temps_execution(this.file);
             System.out.println(temps_bfs + " s");
             Platform.runLater(new Runnable() {
@@ -298,7 +300,8 @@ public class Controller implements Initializable {
             super("DFS");
             this.file = file;
         }
-        public void run(){
+        @Override
+		public void run(){
             temps_dfs = new DFS().temps_execution(this.file);
             System.out.println(temps_dfs + " s");
             Platform.runLater(new Runnable() {

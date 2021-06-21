@@ -91,6 +91,7 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		return this;
 	}
 
+	@Override
 	public int compareTo(Solution other) {
 		return this.fitness - other.getF();
 	}

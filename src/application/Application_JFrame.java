@@ -18,6 +18,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -28,7 +29,6 @@ import algorithmes.BFS;
 import algorithmes.DFS;
 import algorithmes.GA;
 import algorithmes.PSO;
-import java.awt.FlowLayout;
 
 public class Application_JFrame extends JFrame {
 	public static final long serialVersionUID = 1L;
@@ -53,6 +53,7 @@ Algorithme génétique
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					Application_JFrame frame = new Application_JFrame();
@@ -76,7 +77,7 @@ Algorithme génétique
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 		tabbedPane.setBounds(0, 0, 683, 487);
 		contentPane.add(tabbedPane);
 		
@@ -127,6 +128,7 @@ Algorithme génétique
 		
 		JButton btn_choisir = new JButton("choisir");
 		btn_choisir.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
@@ -165,6 +167,7 @@ Algorithme génétique
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				CardLayout cardLayout = (CardLayout) options_panel.getLayout();
 				switch(comboBox.getSelectedIndex()) {
@@ -213,6 +216,7 @@ Algorithme génétique
 		//tabbedPane.setEnabledAt(1, false); // ########################################## enable this when results come
 		btn_lancer = new JButton("Lancer le test");
 		btn_lancer.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				panel_graphe.clearData();

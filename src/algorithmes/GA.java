@@ -1,14 +1,19 @@
 package algorithmes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import Classes.Individus;
+import Classes.Parents;
+import Classes.Population;
 import Classes.Solution;
 
 public class GA extends Solveur_SAT {
 	public int N, max_iter;
 	public double taux_crossover, taux_mutation;
+	private ArrayList<Integer> indices;
+	private Random random;
 
 
 	public GA(int N, int taux_crossover, int taux_mutation, int max_iter) {
@@ -26,69 +31,54 @@ public class GA extends Solveur_SAT {
 	@Override
 	public Solution solve(long temps_max) {
 
-		ArrayList<Individus> population = new ArrayList<Individus>(); /* List of individuals of the population */
-		Individus tempInd = null; /* Temporary Individus (used to create the initial population) */
-		int countInd = 0, index = 0; /* Counters (used to create the initial population) */
-		int[] choosedInd = new int[2]; /* The two individuals chosen for crossover process */
-		Individus[] resCrInd = new Individus[2]; /* Results of crossing between two individuals */
-		Random random = new Random(); /* Random Object (for different random values) */
-		float mr;
+		Population population = new Population(); /* List of individuals of the population */
+		Individus x, child1, child2; /* Temporary Individus (used to create the initial population) */
+		ArrayList<Parents> parents = new ArrayList<>(); /* The two individuals chosen for crossover process */
+		Population children = new Population(); /* Results of crossing between two individuals */
+		random = new Random(System.currentTimeMillis());
+		indices = new ArrayList<>(clauses.getM());
+		for (int i = 0; i < clauses.getM(); i++) {
+			indices.add(i);
+		}
 
 		long startTime = System.currentTimeMillis(); /* Save the start time of the search */
 
+		int countInd = 0;
 		while(countInd < N) { /* Create the initial population */
-			tempInd = new Individus(clauses); /* Create an Individus with a random solution */
-			if(!individus_in_population(tempInd, population)) {/* Check if there isn't already an Individus in the population with the same solution */
-				population.add(new Individus(tempInd)); /* Add the new Individus "tempInd" to the population */
-				countInd++; /* Increase the number of individuals in the population */
+			x = new Individus(clauses); 
+			if(!population.contains(x)) {
+				population.add(x); 
+				countInd++; 
 			}
 		}
 
 		for(int iteration=0; iteration<max_iter; iteration++) {
+			parents.clear();
+			children.clear();
 			if((System.currentTimeMillis() - startTime) >= temps_max)
 				break; /* If the search time has reached (or exceeded) the allowed run time, finish the search */
 
-			do { /* Selection process : Choose TWO random individuals from the population */
-				choosedInd[0] = random.nextInt(N);
-				choosedInd[1] = random.nextInt(N);
-			}while(choosedInd[0] == choosedInd[1]); /* We must choose two DIFFERENT individuals (The same ones have no effect in crossover process) */
-
-			if(random.nextFloat() < taux_crossover) { /* If "Rc" allows the crossover process (value "101" used to take the interval [0;100])*/
-				resCrInd[0] = croiser(population.get(choosedInd[0]), population.get(choosedInd[1]), random.nextInt(clauses.getM()), true);
-				resCrInd[1] = croiser(population.get(choosedInd[0]), population.get(choosedInd[1]), random.nextInt(clauses.getM()), false);
-
-				if((mr = random.nextFloat()) < taux_mutation) { /* If "Rm" allows the mutation process (value "101" used to take the interval [0;100])*/
-					ArrayList<Integer> availableLiterals = new ArrayList<Integer>();
-					for (int i = 0; i < clauses.getM(); i++) {
-						availableLiterals.add(i);
-					}
-					for (int i = 0; i < (mr*taux_mutation)%clauses.getM(); i++) {
-						resCrInd[0].muter(clauses, availableLiterals.remove(random.nextInt(availableLiterals.size())));
-					}
+			ArrayList<Individus> pop_tmp = new ArrayList<>(population);
+			Collections.shuffle(pop_tmp);
+			for (int i = 0; i < pop_tmp.size()/2; i++) {
+				parents.add(new Parents(pop_tmp.get(2*i), pop_tmp.get(2*i+1)));
+			}
+			for (Parents pair : parents) {
+				//int endroit = random.nextInt(clauses.getM());
+				child1 = croiser(pair.p1, pair.p2);
+				child2 = croiser(pair.p2, pair.p1);
+				children.add(muter(child1));
+				children.add(muter(child2));
+				if (child1.getF() == clauses.getN()) {
+					return child1;
 				}
-				if((mr = random.nextFloat()) < taux_mutation) { /* If "Rm" allows the mutation process (value "101" used to take the interval [0;100])*/
-					ArrayList<Integer> availableLiterals = new ArrayList<Integer>();
-					for (int i = 0; i < clauses.getM(); i++) {
-						availableLiterals.add(i);
-					}
-					for (int i = 0; i < (mr*taux_mutation)%clauses.getM(); i++) {
-						resCrInd[1].muter(clauses, availableLiterals.remove(random.nextInt(availableLiterals.size())));
-					}
+				if (child2.getF() == clauses.getN()) {
+					return child2;
 				}
-
-				for(int i=0; i<population.size(); i++) { /* Update current population with new individuals */
-					if((resCrInd[0] != null) && (population.get(i).getF() < resCrInd[0].getF())) {
-						population.set(i, new Individus(resCrInd[0])); /* New Individus is better, replace current Individus with the new one */
-						resCrInd[0] = null; /* Use first new Individus only once */
-					}
-					else if((resCrInd[1] != null) && (population.get(i).getF() < resCrInd[1].getF())) {
-						population.set(i, new Individus(resCrInd[1])); /* New Individus is better, replace current Individus with the new one */
-						resCrInd[1] = null; /* Use second new Individus only once */
-					}
-
-					if((resCrInd[0] == null) && (resCrInd[1] == null))
-						break; /* The two new individuals already used (replaced an old ones in "population"), exit the loop */
-				}
+			}
+			for (Individus child : children) {
+				population.add(child); // add new child
+				population.remove(); // remove worst individual in population
 			}
 		}
 
@@ -100,32 +90,43 @@ public class GA extends Solveur_SAT {
 		return bestSol;
 	}
 
-	private boolean individus_in_population(Individus tempInd, ArrayList<Individus> population) {
-		for(int i=0; i<population.size(); i++) 
-			if(tempInd.egale(population.get(i))) 
-				return true;
-		return false;
+	private Individus muter(Individus ind) {
+		float r = random.nextFloat();
+		if(r < taux_mutation) { 
+			Collections.shuffle(indices);
+			for (int i = 0; i < (int)((r*taux_mutation)*clauses.getM()); i++) {
+				ind.muter(clauses, indices.get(i));
+			}
+		}
+		return ind;
 	}
 
-	private Individus croiser(Individus i1, Individus i2, int place, boolean firstCross) {
-		Solution resultSol = new Solution().self_gen_alea(clauses.getM());
+	private Individus croiser(Individus x, Individus y, int endroit) { // one point crossover
+		Individus res = new Individus(x);
+		if(random.nextFloat() < taux_crossover) {
+			for(int i=0; i<endroit; i++)
+				res.set(i, x.get(i));
 
-		if(firstCross) {
-			for(int i=0; i<place; i++)
-				resultSol.set(i, i1.get(i));
-
-			for(int i=place; i<resultSol.size(); i++)
-				resultSol.set(i, i2.get(i));
-		}else { /* Second cross */
-			for(int i=0; i<place; i++)
-				resultSol.set(i, i2.get(i));
-
-			for(int i=place; i<resultSol.size(); i++)
-				resultSol.set(i, i1.get(i));
+			for(int i=endroit; i<res.size(); i++)
+				res.set(i, y.get(i));
+			
+			res.setF(res.sat_count(clauses));
 		}
-		
-		resultSol.setF(resultSol.sat_count(clauses));
-		return(new Individus(resultSol));
+		return res;
+	}
+	
+	private Individus croiser(Individus x, Individus y) { // croisement uniforme
+		Individus res = new Individus(x);
+		if(random.nextFloat() < taux_crossover) {
+			for(int i=0; i< res.size(); i++)
+				if (random.nextBoolean()) {
+					res.set(i, x.get(i));
+				} else {
+					res.set(i, y.get(i));
+				}
+			res.setF(res.sat_count(clauses));
+		}
+		return res;
 	}
 
 }

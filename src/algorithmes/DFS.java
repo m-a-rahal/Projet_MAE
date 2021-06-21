@@ -1,6 +1,5 @@
 package algorithmes;
 
-import Classes.ClauseList;
 import Classes.Solution;
 
 import java.util.Stack;

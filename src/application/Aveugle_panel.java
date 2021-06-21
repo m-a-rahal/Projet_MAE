@@ -50,6 +50,7 @@ public class Aveugle_panel extends JPanel{
 		
 		btn_gen_alea = new JButton("générer des clauses aléatoirement");
 		btn_gen_alea.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int n  = parent.aveuglePanel.getNbrClauses();
 		        int m  = parent.aveuglePanel.getNbrVariables();
