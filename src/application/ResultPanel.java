@@ -35,11 +35,7 @@ public class ResultPanel extends JPanel{
 		private Solution solution;
 		private float satisfiability;
 		private long time;
-		private ClauseList clset;
-
-
-		public Result(ClauseList clset, Classes.Solution solution, long time) {
-			this.clset = clset;
+		public Result(ClauseList clset, Solution solution, long time) {
 			this.solution = solution;
 			this.satisfiability = solution != null ? (float)solution.sat_count(clset)/clset.getN() : 0;
 			this.time = time;
@@ -140,7 +136,7 @@ public class ResultPanel extends JPanel{
 
 	public void makeTitle(String searchMethodName) {
 		if(! resultData.isEmpty())
-			this.barChart.setTitle("Nombre de clauses satisfaites pour l'algorithme "+searchMethodName+"\ntaux de clauses satisfaites = "+getSatisfiabilityRate()+"%");
+			this.barChart.setTitle("Nombre de clauses satisfaites = "+best.sat_count(parent.clausesPanel.getClauses())+" pour l'algorithme "+searchMethodName+"\ntaux max de clauses satisfaites = "+getSatisfiabilityRate()+"%");
 	}
 
 

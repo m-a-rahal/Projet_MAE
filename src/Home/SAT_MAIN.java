@@ -19,8 +19,9 @@ public class SAT_MAIN {
 		//tester.tester(new A_star());
 		//System.out.println("\n\n\n");
 		
-		MetaTester tester = new MetaTester(100, 200, 80, 100, 10, 40);
-		tester.tester(true, 1500);
+		//MetaTester tester = new MetaTester(100, 200, 80, 100, 10, 40);
+		MetaTester tester = new MetaTester(100, 100, 0.5, 0.5, 0.5, 0.5, 0.1, 1.0);
+		tester.tester(true, 50);
 	}
 	
 	public static void print(Object text) {

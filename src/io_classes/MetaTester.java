@@ -29,13 +29,13 @@ public class MetaTester {
 		}
 	}
 	
-	public MetaTester(int min_N, int max_N, double min_x, double max_x) {
+	public MetaTester(int min_N, int max_N, double min_c1, double max_c1, double min_c2, double max_c2, double min_p, double max_p) {
 		solveur = new PSO(0, 0, 0, 0, 0);
 		params_PSO = new Params<PSO>();
 		for (int n = min_N; n <= max_N; n+=10) {
-			for (double c1 = min_x; c1 <= max_x; c1+=0.1) {
-				for (double c2 = min_x; c2 <= max_x; c2+=0.1) {
-					for (double p = min_x; p <= max_x; p+=0.1) {
+			for (double c1 = min_c1; c1 <= max_c1; c1+=0.1) {
+				for (double c2 = min_c2; c2 <= max_c2; c2+=0.1) {
+					for (double p = min_p; p <= max_p; p+=0.1) {
 						params_PSO.add(new PSO(n,c1,c2,p,10000));
 					}
 				}
