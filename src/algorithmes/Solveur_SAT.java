@@ -2,6 +2,7 @@ package algorithmes;
 
 import Classes.ClauseList;
 import Classes.Solution;
+import Classes.Solution.TimedSolution;
 
 import java.util.Queue;
 
@@ -18,9 +19,13 @@ public abstract class Solveur_SAT {
 		return solution;
 	}
 	
-	public Solution resoudre(ClauseList clauseList, long temps_max) { /** cette met*/
+	public TimedSolution resoudre(ClauseList clauseList, long temps_max) { /** cette met*/
 		clauses = clauseList;
-		return solve(temps_max);
+		long t0 = System.currentTimeMillis();
+		TimedSolution solution = new TimedSolution(solve(temps_max));
+		solution.time = (System.currentTimeMillis() - t0);
+		solution.clauses = clauses;
+		return solution;
 	}
 
 	public long temps_execution(ClauseList clauseList) { /** cette met*/

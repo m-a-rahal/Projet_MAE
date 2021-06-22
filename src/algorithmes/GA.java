@@ -129,4 +129,8 @@ public class GA extends Solveur_SAT {
 		return res;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%d\t%f\t%f", N, taux_crossover, taux_mutation);
+	}
 }

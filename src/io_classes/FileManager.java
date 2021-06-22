@@ -16,8 +16,13 @@ public class FileManager {
 	public static String benchmarks_non_sat = "E:\\JAVA JEE\\eclipse-workspace\\Projet_MAE\\benchmarks\\uuf75.325.100";
 	protected int n; // nombre de clauses
 	protected int m; // nombre de variables
+	private boolean console_log = true;
 	
+	public FileManager(boolean console_log) {
+		this.console_log = console_log;
+	}
 	
+	public FileManager() {}
 	
 	public ClauseList lire_benchmark(int type, int indice) {
 		if (indice > 0) indice--; // les indices sont de 1 a 100
@@ -36,7 +41,7 @@ public class FileManager {
 	public ClauseList read(String ficher_cnf) {
 		try {
 			ClauseList clauses = null;
-			System.out.println("reading from file:\n"+ficher_cnf);
+			if(console_log) System.out.println("reading from file:\n"+ficher_cnf);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(ficher_cnf)));
 			 // get n and m
 			this.get_cnf_file_parameters(reader);
@@ -109,5 +114,9 @@ public class FileManager {
 	    Pattern p = Pattern.compile(pattern);
 		Matcher matcher = p.matcher(text);
 		return matcher.find() ? matcher : null;
+	}
+	
+	public void log_in_console(boolean console_log) {
+		this.console_log = console_log;
 	}
 }

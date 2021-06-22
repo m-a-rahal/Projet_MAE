@@ -61,5 +61,10 @@ public class PSO extends Solveur_SAT {
 
 		return gbest;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%d\t%f\t%f\t%f", N, c1, c2, poids);
+	}
 
 }

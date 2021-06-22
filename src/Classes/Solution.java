@@ -152,4 +152,33 @@ public class Solution extends ArrayList<Integer> implements Comparable<Solution>
 		}
 		return true;
 	}
+	
+	public static class TimedSolution extends Solution {
+		private static final long serialVersionUID = 1L;
+
+		public TimedSolution(Solution s) {
+			super(s);
+			fitness = s.getF();
+		}
+		public TimedSolution() {}
+
+		public long time;
+		public ClauseList clauses;
+
+		public double sat_precent() {
+			return 100*getF() / (double)clauses.getN();
+		}
+		
+		public TimedSolution ajouter(TimedSolution other) {
+			time += other.time;
+			fitness = Math.max(fitness, other.fitness);
+			clauses = other.clauses;
+			return this;
+		}
+		
+		public TimedSolution diviser(int k) {
+			time /= k;
+			return this;
+		}
+	}
 }
