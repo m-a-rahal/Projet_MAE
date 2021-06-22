@@ -295,6 +295,7 @@ Algorithme génétique
 				panel_graphe.makeTitle(methodName);
 
 				tabbedPane.setEnabledAt(1, true);
+				tabbedPane.setSelectedIndex(1);
 			}
 		});
 		btn_lancer.setBounds(10, 362, 145, 29);
